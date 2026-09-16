@@ -1,0 +1,1737 @@
+{
+  "version": 1,
+  "users": [
+    {
+      "id": "demo-user-001",
+      "fullName": "Ananya Rao",
+      "email": "demo@abhaya.app",
+      "phone": "+91 98765 43210",
+      "passwordHash": "$2a$12$ssk3YgEVhQBSbe6.DHyRL.CzLrRDzhxRH70rCX1gu3kOLvMOjc6n.",
+      "role": "USER",
+      "city": "Hyderabad",
+      "settings": {
+        "sosCountdown": 5,
+        "journeyTimeoutMinutes": 10,
+        "deviationSensitivity": "medium",
+        "checkInGraceMinutes": 5,
+        "publicLinkHours": 24,
+        "notificationPreferences": {
+          "push": true,
+          "sms": true,
+          "email": true
+        },
+        "privacy": {
+          "locationSharing": false,
+          "evidenceRetentionDays": 30,
+          "historyRetentionDays": 180
+        },
+        "escalation": {
+          "notifyContacts": true,
+          "includeLastKnownLocation": true
+        }
+      },
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "demo-user-002",
+      "fullName": "Maya Iyer",
+      "email": "maya@abhaya.app",
+      "phone": "+91 90000 11007",
+      "passwordHash": "$2a$12$ssk3YgEVhQBSbe6.DHyRL.CzLrRDzhxRH70rCX1gu3kOLvMOjc6n.",
+      "role": "CONTACT",
+      "city": "Hyderabad",
+      "settings": {
+        "sosCountdown": 5,
+        "journeyTimeoutMinutes": 10,
+        "deviationSensitivity": "medium",
+        "checkInGraceMinutes": 5,
+        "publicLinkHours": 24,
+        "notificationPreferences": {
+          "push": true,
+          "sms": true,
+          "email": true
+        },
+        "privacy": {
+          "locationSharing": false,
+          "evidenceRetentionDays": 30,
+          "historyRetentionDays": 180
+        },
+        "escalation": {
+          "notifyContacts": true,
+          "includeLastKnownLocation": true
+        }
+      },
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "demo-admin-001",
+      "fullName": "ABHAYA Operations",
+      "email": "admin@abhaya.app",
+      "phone": "+91 90000 00000",
+      "passwordHash": "$2a$12$JPwRpBxRS0vHDqPL/ELjVuJ3tGGSfAU4BiehdKt4ZbXiW3.7mVDTu",
+      "role": "ADMIN",
+      "city": "Hyderabad",
+      "settings": {
+        "sosCountdown": 5,
+        "journeyTimeoutMinutes": 10,
+        "deviationSensitivity": "medium",
+        "checkInGraceMinutes": 5,
+        "publicLinkHours": 24,
+        "notificationPreferences": {
+          "push": true,
+          "sms": true,
+          "email": true
+        },
+        "privacy": {
+          "locationSharing": false,
+          "evidenceRetentionDays": 30,
+          "historyRetentionDays": 180
+        },
+        "escalation": {
+          "notifyContacts": true,
+          "includeLastKnownLocation": true
+        }
+      },
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    }
+  ],
+  "devices": [
+    {
+      "id": "device-001",
+      "userId": "demo-user-001",
+      "label": "Chrome on this device",
+      "platform": "WEB",
+      "lastSeenAt": "2026-09-08T17:39:45.947Z",
+      "createdAt": "2026-09-08T17:39:45.947Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "220bc4a7-aa18-416a-8a1c-b96f848a2abb",
+      "userId": "demo-user-001",
+      "refreshTokenHash": "df84263870410a56745a0fa967499157f1ab904dc2e9f7fb1cb34ca51c486f40",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+      "ipAddress": "127.0.0.1",
+      "expiresAt": "2026-10-10T07:04:23.248Z",
+      "createdAt": "2026-09-10T07:04:23.248Z"
+    },
+    {
+      "id": "2724f567-5d0f-4d15-b5fd-38885d1e5b34",
+      "userId": "demo-user-001",
+      "refreshTokenHash": "44c8d0e3e279aba59403f1e3532cc56d6087d5b49e832397bc0d8e60d9c9bd82",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "ipAddress": "127.0.0.1",
+      "expiresAt": "2026-10-11T18:08:02.366Z",
+      "createdAt": "2026-09-11T18:08:02.366Z"
+    },
+    {
+      "id": "f0289572-6986-4cff-b27c-865a23360cc3",
+      "userId": "demo-user-001",
+      "refreshTokenHash": "58d8e32ea40b26a83635d186061dbf439e9b18b58d80553f17efe27a89bd42c8",
+      "userAgent": "curl/8.7.1",
+      "ipAddress": "172.20.10.2",
+      "expiresAt": "2026-10-11T18:55:34.143Z",
+      "createdAt": "2026-09-11T18:55:34.143Z"
+    },
+    {
+      "id": "9fc85213-00d7-4891-b82c-003411a7cdb0",
+      "userId": "demo-user-001",
+      "refreshTokenHash": "884748074ee44e47ac138bc2e14e0ec8e2b19f804bab6796711d34a252b8da4e",
+      "userAgent": "Expo/1017880 CFNetwork/3890.100.1 Darwin/27.0.0",
+      "ipAddress": "172.20.10.1",
+      "expiresAt": "2026-10-11T18:57:04.743Z",
+      "createdAt": "2026-09-11T18:57:04.743Z"
+    },
+    {
+      "id": "a196bb9f-94bf-42af-be6b-b8c5b2fdf439",
+      "userId": "demo-user-001",
+      "refreshTokenHash": "9843b2f6ec0802d4412e39dea19e9f89c269125cc87ef94ac1271483f046bd05",
+      "userAgent": "curl/8.7.1",
+      "ipAddress": "172.20.10.2",
+      "expiresAt": "2026-10-12T03:07:04.866Z",
+      "createdAt": "2026-09-12T03:07:04.866Z"
+    },
+    {
+      "id": "bbd598c4-d1b4-4326-8ec3-48bb68fcdd20",
+      "userId": "demo-user-001",
+      "refreshTokenHash": "a08013c97386c20e712a03c5f3f351ff8ec4a6b16e26a4a113fe603d284b37cc",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "ipAddress": "127.0.0.1",
+      "expiresAt": "2026-10-12T14:04:06.506Z",
+      "createdAt": "2026-09-12T14:04:06.506Z"
+    },
+    {
+      "id": "3e8360fe-579d-4bd6-824d-397bb4f2fe53",
+      "userId": "demo-user-001",
+      "refreshTokenHash": "c4342f4816d4f731a3e9fcf27936c3850d053b658c7ce6cc3e31df517ec741ec",
+      "userAgent": "Expo/1017880 CFNetwork/3890.100.1 Darwin/27.0.0",
+      "ipAddress": "192.168.1.8",
+      "expiresAt": "2026-10-12T14:09:13.913Z",
+      "createdAt": "2026-09-12T14:09:13.913Z"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "contact-001",
+      "ownerId": "demo-user-001",
+      "name": "Maya Iyer",
+      "phone": "+91 90000 11007",
+      "email": "maya@abhaya.app",
+      "relationship": "Sister",
+      "verified": true,
+      "priority": 1,
+      "receives": [
+        "EMERGENCY",
+        "JOURNEY",
+        "TIMER",
+        "CHECK_IN"
+      ],
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "contact-002",
+      "ownerId": "demo-user-001",
+      "name": "Rohan Rao",
+      "phone": "+91 90000 22007",
+      "email": "rohan@abhaya.app",
+      "relationship": "Friend",
+      "verified": true,
+      "priority": 2,
+      "receives": [
+        "EMERGENCY",
+        "TIMER"
+      ],
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "contact-003",
+      "ownerId": "demo-user-001",
+      "name": "Nisha Kapoor",
+      "phone": "+91 90000 33007",
+      "email": "nisha@abhaya.app",
+      "relationship": "Colleague",
+      "verified": false,
+      "priority": 3,
+      "receives": [
+        "EMERGENCY"
+      ],
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "contact-004",
+      "ownerId": "demo-user-001",
+      "name": "Aarav Rao",
+      "phone": "+91 90000 44007",
+      "email": "aarav@abhaya.app",
+      "relationship": "Brother",
+      "verified": true,
+      "priority": 4,
+      "receives": [
+        "EMERGENCY",
+        "CHECK_IN"
+      ],
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "contact-005",
+      "ownerId": "demo-user-001",
+      "name": "Sana Ali",
+      "phone": "+91 90000 55007",
+      "email": "sana@abhaya.app",
+      "relationship": "Friend",
+      "verified": true,
+      "priority": 5,
+      "receives": [
+        "JOURNEY",
+        "TIMER"
+      ],
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "cb8092a4-3b3d-4a7e-a0ea-ba2fe062f81f",
+      "ownerId": "demo-user-001",
+      "name": "Harsha",
+      "phone": "90005 95888",
+      "relationship": "Partner",
+      "receives": [
+        "EMERGENCY",
+        "JOURNEY",
+        "TIMER",
+        "CHECK_IN"
+      ],
+      "verified": false,
+      "priority": 6,
+      "createdAt": "2026-09-12T14:01:19.937Z",
+      "updatedAt": "2026-09-12T14:01:19.937Z"
+    }
+  ],
+  "invitations": [
+    {
+      "id": "b9e28ae6-bc8b-4901-86d9-926a4a22e30a",
+      "ownerId": "demo-user-001",
+      "contactId": "cb8092a4-3b3d-4a7e-a0ea-ba2fe062f81f",
+      "phone": "90005 95888",
+      "tokenHash": "4310d1b9d7116a333d2d63997d279d2987af9cd215f6aad5aa765ff40bbd45e2",
+      "status": "PENDING",
+      "expiresAt": "2026-09-15T14:01:19.939Z",
+      "createdAt": "2026-09-12T14:01:19.939Z"
+    }
+  ],
+  "emergencies": [
+    {
+      "id": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "userId": "demo-user-001",
+      "source": "SOS",
+      "status": "RESOLVED",
+      "deliveryState": "DELIVERED",
+      "activatedAt": "2026-09-12T13:49:51.856Z",
+      "createdAt": "2026-09-12T13:49:51.856Z",
+      "updatedAt": "2026-09-12T13:50:10.043Z",
+      "shareTokenHash": "3fdaee96b8cdb1c649586a6bf38b2223e6e43b18c0155a489394b009a9aebd19",
+      "shareExpiresAt": "2026-09-13T13:49:51.860Z",
+      "resolvedAt": "2026-09-12T13:50:10.043Z",
+      "shareRevokedAt": "2026-09-12T13:50:10.043Z"
+    },
+    {
+      "id": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "userId": "demo-user-001",
+      "source": "SOS",
+      "status": "RESOLVED",
+      "location": {
+        "latitude": 17.61941694994215,
+        "longitude": 77.94617720360344,
+        "accuracy": 10.43171278684042,
+        "timestamp": "2026-09-11T19:00:59.565Z"
+      },
+      "lastLocationAt": "2026-09-11T19:00:59.565Z",
+      "deliveryState": "DELIVERED",
+      "activatedAt": "2026-09-11T19:00:59.536Z",
+      "createdAt": "2026-09-11T19:00:59.536Z",
+      "updatedAt": "2026-09-11T19:01:07.070Z",
+      "shareTokenHash": "610569ec09dc2f1dcfee38b5dddf72ab5ed3307eaebbff4c783b85ef8836018d",
+      "shareExpiresAt": "2026-09-12T19:00:59.545Z",
+      "resolvedAt": "2026-09-11T19:01:07.070Z",
+      "shareRevokedAt": "2026-09-11T19:01:07.070Z"
+    },
+    {
+      "id": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "userId": "demo-user-001",
+      "source": "SILENT_SOS",
+      "status": "RESOLVED",
+      "location": {
+        "latitude": 17.61937143125755,
+        "longitude": 77.94621921323565,
+        "accuracy": 35,
+        "timestamp": "2026-09-11T18:17:41.718Z"
+      },
+      "lastLocationAt": "2026-09-11T18:17:41.718Z",
+      "deliveryState": "DELIVERED",
+      "activatedAt": "2026-09-11T18:10:10.780Z",
+      "createdAt": "2026-09-11T18:10:10.780Z",
+      "updatedAt": "2026-09-11T19:00:51.602Z",
+      "shareTokenHash": "d8e139d0409b12b8d7d97beda89bcfd22878daac6095eb868345f56411710dd7",
+      "shareExpiresAt": "2026-09-12T18:10:10.787Z",
+      "resolvedAt": "2026-09-11T19:00:51.602Z",
+      "shareRevokedAt": "2026-09-11T19:00:51.602Z"
+    },
+    {
+      "id": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "userId": "demo-user-001",
+      "source": "SOS",
+      "status": "CANCELLED",
+      "location": {
+        "latitude": 17.6193714309019,
+        "longitude": 77.94621921235301,
+        "accuracy": 35,
+        "timestamp": "2026-09-11T18:09:38.106Z"
+      },
+      "lastLocationAt": "2026-09-11T18:09:38.106Z",
+      "deliveryState": "DELIVERED",
+      "activatedAt": "2026-09-11T18:08:08.057Z",
+      "createdAt": "2026-09-11T18:08:08.057Z",
+      "updatedAt": "2026-09-11T18:10:04.410Z",
+      "shareTokenHash": "7289e53901d3a665eb89645f3f35bfd5a779cbb08cd92bb9a8bf1fc7ebc5d1e8",
+      "shareExpiresAt": "2026-09-12T18:08:08.064Z",
+      "resolvedAt": "2026-09-11T18:10:04.410Z",
+      "shareRevokedAt": "2026-09-11T18:10:04.410Z"
+    },
+    {
+      "id": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "userId": "demo-user-001",
+      "source": "SOS",
+      "status": "RESOLVED",
+      "deliveryState": "DELIVERED",
+      "activatedAt": "2026-09-10T07:06:22.524Z",
+      "createdAt": "2026-09-10T07:06:22.524Z",
+      "updatedAt": "2026-09-10T07:06:32.156Z",
+      "shareTokenHash": "c195babb9900e83b54bdb546da4eb57d32fd99b6f484842388b970eb7ba6f0c7",
+      "shareExpiresAt": "2026-09-11T07:06:22.526Z",
+      "resolvedAt": "2026-09-10T07:06:32.156Z",
+      "shareRevokedAt": "2026-09-10T07:06:32.156Z"
+    },
+    {
+      "id": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "userId": "demo-user-001",
+      "source": "SOS",
+      "status": "RESOLVED",
+      "location": {
+        "latitude": 17.619457220477805,
+        "longitude": 77.94624720059544,
+        "accuracy": 35,
+        "timestamp": "2026-09-09T13:10:34.604Z"
+      },
+      "lastLocationAt": "2026-09-09T13:10:34.604Z",
+      "deliveryState": "DELIVERED",
+      "activatedAt": "2026-09-09T13:10:04.557Z",
+      "createdAt": "2026-09-09T13:10:04.557Z",
+      "updatedAt": "2026-09-09T13:10:46.101Z",
+      "shareTokenHash": "4c442f6786d4cb915f13e523944259a0b44f65ab39cc32c7dfa447f6cd41e572",
+      "shareExpiresAt": "2026-09-10T13:10:04.565Z",
+      "resolvedAt": "2026-09-09T13:10:46.101Z",
+      "shareRevokedAt": "2026-09-09T13:10:46.101Z"
+    },
+    {
+      "id": "emergency-001",
+      "userId": "demo-user-002",
+      "status": "RESOLVED",
+      "source": "SOS",
+      "deliveryState": "DELIVERED",
+      "activatedAt": "2026-09-06T17:39:46.535Z",
+      "resolvedAt": "2026-09-06T17:56:46.535Z",
+      "createdAt": "2026-09-06T17:39:46.535Z",
+      "updatedAt": "2026-09-06T17:56:46.535Z",
+      "location": {
+        "latitude": 17.4156,
+        "longitude": 78.4347,
+        "accuracy": 12,
+        "timestamp": "2026-09-06T17:39:46.535Z"
+      }
+    },
+    {
+      "id": "emergency-002",
+      "userId": "demo-user-001",
+      "status": "CANCELLED",
+      "source": "SILENT_SOS",
+      "deliveryState": "DELIVERED",
+      "activatedAt": "2026-08-31T17:39:46.535Z",
+      "createdAt": "2026-08-31T17:39:46.535Z",
+      "updatedAt": "2026-08-31T17:41:46.535Z",
+      "location": {
+        "latitude": 17.4325,
+        "longitude": 78.407,
+        "accuracy": 20,
+        "timestamp": "2026-08-31T17:39:46.535Z"
+      }
+    }
+  ],
+  "emergencyStatusHistory": [
+    {
+      "id": "a6b08fc0-07ce-4eb7-9f50-dbe60420e124",
+      "emergencyId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "from": "ACTIVE",
+      "to": "RESOLVED",
+      "actorId": "demo-user-001",
+      "reason": "User marked safe",
+      "createdAt": "2026-09-12T13:50:10.043Z"
+    },
+    {
+      "id": "8387362d-6a42-474e-9ddb-3635d682698a",
+      "emergencyId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "to": "ACTIVE",
+      "actorId": "demo-user-001",
+      "createdAt": "2026-09-12T13:49:51.856Z"
+    },
+    {
+      "id": "aef9012e-0c29-4500-bbf9-cf266e08f2fa",
+      "emergencyId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "from": "ACTIVE",
+      "to": "RESOLVED",
+      "actorId": "demo-user-001",
+      "reason": "User marked safe",
+      "createdAt": "2026-09-11T19:01:07.070Z"
+    },
+    {
+      "id": "d4d5e75b-a42f-4d97-890d-418002d4a6c7",
+      "emergencyId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "to": "ACTIVE",
+      "actorId": "demo-user-001",
+      "createdAt": "2026-09-11T19:00:59.536Z"
+    },
+    {
+      "id": "a0d61f56-2637-4969-8d17-5ecc86eab0e7",
+      "emergencyId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "from": "ACTIVE",
+      "to": "RESOLVED",
+      "actorId": "demo-user-001",
+      "reason": "User marked safe",
+      "createdAt": "2026-09-11T19:00:51.602Z"
+    },
+    {
+      "id": "aa76a31c-bf02-44de-9d28-0fe2880a5ab2",
+      "emergencyId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "to": "ACTIVE",
+      "actorId": "demo-user-001",
+      "createdAt": "2026-09-11T18:10:10.780Z"
+    },
+    {
+      "id": "8700b363-30fd-4be9-8487-6ad015f2d86a",
+      "emergencyId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "from": "ACTIVE",
+      "to": "CANCELLED",
+      "actorId": "demo-user-001",
+      "reason": "User cancelled",
+      "createdAt": "2026-09-11T18:10:04.410Z"
+    },
+    {
+      "id": "0ed2225b-14fc-4bb9-aa2f-7caf13a46272",
+      "emergencyId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "to": "ACTIVE",
+      "actorId": "demo-user-001",
+      "createdAt": "2026-09-11T18:08:08.057Z"
+    },
+    {
+      "id": "5a7cb0ea-fc34-406f-9344-3bb3136c9b2e",
+      "emergencyId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "from": "ACTIVE",
+      "to": "RESOLVED",
+      "actorId": "demo-user-001",
+      "reason": "User marked safe",
+      "createdAt": "2026-09-10T07:06:32.156Z"
+    },
+    {
+      "id": "fc275cff-4bee-4783-ad9f-9f4b0b7a7787",
+      "emergencyId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "to": "ACTIVE",
+      "actorId": "demo-user-001",
+      "createdAt": "2026-09-10T07:06:22.524Z"
+    },
+    {
+      "id": "fd7302a8-f4a2-4f14-843d-3ac44083fe74",
+      "emergencyId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "from": "ACTIVE",
+      "to": "RESOLVED",
+      "actorId": "demo-user-001",
+      "reason": "User marked safe",
+      "createdAt": "2026-09-09T13:10:46.101Z"
+    },
+    {
+      "id": "829feb66-2f96-4d66-be7c-488d3bc78807",
+      "emergencyId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "to": "ACTIVE",
+      "actorId": "demo-user-001",
+      "createdAt": "2026-09-09T13:10:04.557Z"
+    },
+    {
+      "id": "6e79fd20-2c5b-4f1d-b278-384905ba2ba5",
+      "emergencyId": "emergency-001",
+      "to": "CREATED",
+      "createdAt": "2026-09-06T17:39:46.535Z"
+    },
+    {
+      "id": "af4a3d31-72c3-4bfe-bd5f-29cd4b569657",
+      "emergencyId": "emergency-001",
+      "from": "CREATED",
+      "to": "ACTIVE",
+      "createdAt": "2026-09-06T17:39:46.535Z"
+    },
+    {
+      "id": "c410af98-6587-4f04-81ec-1e2599a01518",
+      "emergencyId": "emergency-001",
+      "from": "ACTIVE",
+      "to": "RESOLVED",
+      "createdAt": "2026-09-06T17:56:46.535Z"
+    }
+  ],
+  "journeys": [
+    {
+      "id": "18325f9a-4c6a-47ae-a139-10a0bbe0e663",
+      "userId": "demo-user-001",
+      "title": "Class",
+      "origin": "Home",
+      "destination": "College",
+      "expectedArrival": "2026-09-12T14:52:33.403Z",
+      "status": "PLANNED",
+      "progress": 0,
+      "contactIds": [
+        "contact-001",
+        "contact-002",
+        "contact-004",
+        "contact-005"
+      ],
+      "locationSessionId": "966716fb-24cc-4900-b065-f3e27615f14f",
+      "createdAt": "2026-09-12T13:52:33.610Z",
+      "updatedAt": "2026-09-12T13:52:33.610Z"
+    },
+    {
+      "id": "c8dfe29c-ab99-4a95-bd35-b818fae92770",
+      "userId": "demo-user-001",
+      "title": "Mobile journey",
+      "origin": "Current location",
+      "destination": "Hyd",
+      "expectedArrival": "2026-09-11T19:45:46.871Z",
+      "status": "COMPLETED",
+      "progress": 100,
+      "contactIds": [],
+      "locationSessionId": "789fbad5-5239-4a04-a5fd-6a06f50a2237",
+      "createdAt": "2026-09-11T19:00:46.845Z",
+      "updatedAt": "2026-09-12T13:52:13.279Z",
+      "completedAt": "2026-09-12T13:52:13.279Z"
+    },
+    {
+      "id": "8ca50dd5-d643-42b6-881f-1b198a963cd4",
+      "userId": "demo-user-001",
+      "title": "Mobile journey",
+      "origin": "Current location",
+      "destination": "Hyd",
+      "expectedArrival": "2026-09-11T19:42:17.879Z",
+      "status": "PLANNED",
+      "progress": 0,
+      "contactIds": [],
+      "locationSessionId": "a14483fe-5bd0-4b4e-8a8f-ee3aeae75b52",
+      "createdAt": "2026-09-11T18:57:17.837Z",
+      "updatedAt": "2026-09-11T18:57:17.837Z"
+    },
+    {
+      "id": "2dc9ac67-e270-45cd-975f-fdf92b07e8d7",
+      "userId": "demo-user-001",
+      "title": "jog",
+      "origin": "newbus stop",
+      "destination": "st.anthony",
+      "expectedArrival": "2026-09-10T07:05:00.000Z",
+      "status": "COMPLETED",
+      "progress": 100,
+      "contactIds": [
+        "contact-005"
+      ],
+      "locationSessionId": "2bff2ee2-e09d-4123-9f26-e23d478768b0",
+      "createdAt": "2026-09-10T07:05:50.072Z",
+      "updatedAt": "2026-09-10T07:06:35.794Z",
+      "completedAt": "2026-09-10T07:06:35.794Z"
+    },
+    {
+      "id": "journey-001",
+      "userId": "demo-user-001",
+      "title": "Home from studio",
+      "origin": "Banjara Hills",
+      "destination": "Gachibowli",
+      "expectedArrival": "2026-09-08T18:07:46.535Z",
+      "status": "COMPLETED",
+      "progress": 100,
+      "distanceRemainingKm": 5.4,
+      "eta": "12 min",
+      "contactIds": [
+        "contact-001",
+        "contact-002"
+      ],
+      "locationSessionId": "loc-session-001",
+      "lastLocation": {
+        "latitude": 17.4239,
+        "longitude": 78.4071,
+        "accuracy": 18,
+        "timestamp": "2026-09-08T17:38:16.535Z"
+      },
+      "createdAt": "2026-09-08T17:13:46.535Z",
+      "updatedAt": "2026-09-10T07:06:38.577Z",
+      "completedAt": "2026-09-10T07:06:38.577Z"
+    },
+    {
+      "id": "journey-002",
+      "userId": "demo-user-002",
+      "title": "Late shift",
+      "origin": "Madhapur",
+      "destination": "Kondapur",
+      "expectedArrival": "2026-09-08T18:25:46.535Z",
+      "status": "ACTIVE",
+      "progress": 41,
+      "distanceRemainingKm": 3.2,
+      "eta": "18 min",
+      "contactIds": [],
+      "locationSessionId": "loc-session-002",
+      "lastLocation": {
+        "latitude": 17.4494,
+        "longitude": 78.3915,
+        "accuracy": 24,
+        "timestamp": "2026-09-08T17:36:46.535Z"
+      },
+      "createdAt": "2026-09-08T17:18:46.535Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "journey-003",
+      "userId": "demo-user-001",
+      "title": "Airport drop",
+      "origin": "Jubilee Hills",
+      "destination": "RGIA Airport",
+      "expectedArrival": "2026-09-08T18:49:46.535Z",
+      "status": "COMPLETED",
+      "progress": 100,
+      "distanceRemainingKm": 29.5,
+      "eta": "52 min",
+      "contactIds": [
+        "contact-001"
+      ],
+      "locationSessionId": "loc-session-003",
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-10T07:06:08.726Z",
+      "completedAt": "2026-09-10T07:06:08.726Z"
+    }
+  ],
+  "timers": [
+    {
+      "id": "timer-001",
+      "userId": "demo-user-001",
+      "label": "Walk home check-in",
+      "durationMinutes": 15,
+      "expiresAt": "2026-09-08T17:48:46.535Z",
+      "status": "CONFIRMED",
+      "createdAt": "2026-09-08T17:33:46.535Z",
+      "updatedAt": "2026-09-12T13:52:04.208Z"
+    }
+  ],
+  "checkIns": [
+    {
+      "id": "checkin-001",
+      "userId": "demo-user-001",
+      "journeyId": "journey-001",
+      "message": "Reached the metro safely",
+      "location": {
+        "latitude": 17.4239,
+        "longitude": 78.4071,
+        "accuracy": 18,
+        "timestamp": "2026-09-08T17:38:16.535Z"
+      },
+      "createdAt": "2026-09-08T17:27:46.535Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "4e86ed1f-6c6c-4f97-a35f-0e92d7931c99",
+      "userId": "demo-user-001",
+      "type": "CONTACT_INVITED",
+      "title": "Trusted contact invitation ready",
+      "body": "Harsha can be verified after accepting the invitation.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "CONTACT",
+      "relatedId": "cb8092a4-3b3d-4a7e-a0ea-ba2fe062f81f",
+      "createdAt": "2026-09-12T14:01:19.941Z",
+      "deliveredAt": "2026-09-12T14:01:19.943Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "4b2dfe07-04fd-4136-9169-a3cd3bf66c4f",
+      "recipientId": "contact-001",
+      "type": "CONTACT_TEST",
+      "title": "ABHAYA test alert",
+      "body": "Ananya Rao sent a test notification. No emergency was created.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "CONTACT",
+      "relatedId": "contact-001",
+      "createdAt": "2026-09-12T14:00:58.182Z",
+      "deliveredAt": "2026-09-12T14:00:58.184Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "ebe93560-1882-4307-ae45-553e48fc8fb4",
+      "recipientId": "contact-005",
+      "type": "JOURNEY_COMPLETED",
+      "title": "Journey completed safely",
+      "body": "Ananya reached Hyd.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "JOURNEY",
+      "relatedId": "c8dfe29c-ab99-4a95-bd35-b818fae92770",
+      "createdAt": "2026-09-12T13:52:13.285Z",
+      "deliveredAt": "2026-09-12T13:52:13.286Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "e9a8590a-a443-4cba-9f22-9b6ba6591ddc",
+      "recipientId": "contact-001",
+      "type": "JOURNEY_COMPLETED",
+      "title": "Journey completed safely",
+      "body": "Ananya reached Hyd.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "JOURNEY",
+      "relatedId": "c8dfe29c-ab99-4a95-bd35-b818fae92770",
+      "createdAt": "2026-09-12T13:52:13.282Z",
+      "deliveredAt": "2026-09-12T13:52:13.284Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "5b9aed51-838c-46ab-a9a8-8aa8d437f152",
+      "recipientId": "contact-005",
+      "type": "TIMER_CONFIRMED",
+      "title": "Safety check-in received",
+      "body": "Ananya confirmed they are safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "TIMER",
+      "relatedId": "timer-001",
+      "createdAt": "2026-09-12T13:52:04.217Z",
+      "deliveredAt": "2026-09-12T13:52:04.219Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "f7c45b2d-bd01-4753-8d08-34a5b440ac88",
+      "recipientId": "contact-002",
+      "type": "TIMER_CONFIRMED",
+      "title": "Safety check-in received",
+      "body": "Ananya confirmed they are safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "TIMER",
+      "relatedId": "timer-001",
+      "createdAt": "2026-09-12T13:52:04.214Z",
+      "deliveredAt": "2026-09-12T13:52:04.216Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "16d93385-44d4-4f8b-8209-b600f29029f0",
+      "recipientId": "contact-001",
+      "type": "TIMER_CONFIRMED",
+      "title": "Safety check-in received",
+      "body": "Ananya confirmed they are safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "TIMER",
+      "relatedId": "timer-001",
+      "createdAt": "2026-09-12T13:52:04.211Z",
+      "deliveredAt": "2026-09-12T13:52:04.213Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "b9b780fb-675e-4a60-a846-a4664ebf8bee",
+      "recipientId": "contact-004",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "createdAt": "2026-09-12T13:50:10.047Z",
+      "deliveredAt": "2026-09-12T13:50:10.047Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "f2f9527d-aabd-4ace-a34f-b294245cf15b",
+      "recipientId": "contact-002",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "createdAt": "2026-09-12T13:50:10.046Z",
+      "deliveredAt": "2026-09-12T13:50:10.046Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "0614c599-14fc-415a-8531-3d8259fc51c2",
+      "recipientId": "contact-001",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "createdAt": "2026-09-12T13:50:10.045Z",
+      "deliveredAt": "2026-09-12T13:50:10.045Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "362c6e91-6253-4763-8d7b-188e38052dc0",
+      "recipientId": "contact-004",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "createdAt": "2026-09-12T13:49:51.859Z",
+      "deliveredAt": "2026-09-12T13:49:51.860Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "ee31c621-ca7f-48c6-b39d-171ae2e56836",
+      "recipientId": "contact-002",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "createdAt": "2026-09-12T13:49:51.858Z",
+      "deliveredAt": "2026-09-12T13:49:51.859Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "9e15e41a-1c16-49b1-b2fe-01e67277de20",
+      "recipientId": "contact-001",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "createdAt": "2026-09-12T13:49:51.857Z",
+      "deliveredAt": "2026-09-12T13:49:51.858Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "27d37437-5f37-4fd4-943b-70126313b9ee",
+      "recipientId": "contact-004",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "createdAt": "2026-09-11T19:01:07.074Z",
+      "deliveredAt": "2026-09-11T19:01:07.074Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "fe166138-ef11-4882-872b-f2d825162443",
+      "recipientId": "contact-002",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "createdAt": "2026-09-11T19:01:07.073Z",
+      "deliveredAt": "2026-09-11T19:01:07.073Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "e65dd752-70d7-42f2-933e-c643a2f61609",
+      "recipientId": "contact-001",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "createdAt": "2026-09-11T19:01:07.071Z",
+      "deliveredAt": "2026-09-11T19:01:07.072Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "323f6200-2f52-4238-9633-696fe6bc9c9f",
+      "recipientId": "contact-004",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "createdAt": "2026-09-11T19:00:59.543Z",
+      "deliveredAt": "2026-09-11T19:00:59.544Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "31f9fecf-ca49-4826-928b-d20d4dfc45f9",
+      "recipientId": "contact-002",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "createdAt": "2026-09-11T19:00:59.541Z",
+      "deliveredAt": "2026-09-11T19:00:59.542Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "361332d3-a7b1-4f81-aab4-3f3b5a82c443",
+      "recipientId": "contact-001",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "createdAt": "2026-09-11T19:00:59.539Z",
+      "deliveredAt": "2026-09-11T19:00:59.540Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "f16d979d-d243-4a2a-b390-f5cf20ef07de",
+      "recipientId": "contact-004",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "createdAt": "2026-09-11T19:00:51.606Z",
+      "deliveredAt": "2026-09-11T19:00:51.606Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "04b9bd2b-53df-4754-97ca-19bcd8303b3e",
+      "recipientId": "contact-002",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "createdAt": "2026-09-11T19:00:51.605Z",
+      "deliveredAt": "2026-09-11T19:00:51.605Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "843f5856-1f03-4db0-9c86-d747b71a37c2",
+      "recipientId": "contact-001",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "createdAt": "2026-09-11T19:00:51.603Z",
+      "deliveredAt": "2026-09-11T19:00:51.604Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "56fb1ca9-340f-4721-a7ae-f3c717c6f914",
+      "recipientId": "contact-004",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "createdAt": "2026-09-11T18:10:10.785Z",
+      "deliveredAt": "2026-09-11T18:10:10.786Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "e89c25c4-7e7f-4822-8969-b63c1d2259ae",
+      "recipientId": "contact-002",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "createdAt": "2026-09-11T18:10:10.784Z",
+      "deliveredAt": "2026-09-11T18:10:10.784Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "f87859d9-51fd-451d-8da0-687e6de5661d",
+      "recipientId": "contact-001",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "createdAt": "2026-09-11T18:10:10.782Z",
+      "deliveredAt": "2026-09-11T18:10:10.783Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "63dee6a4-63ae-4bdd-9edf-73e99fc5cc70",
+      "recipientId": "contact-004",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Emergency cancelled",
+      "body": "Ananya cancelled the emergency alert.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "createdAt": "2026-09-11T18:10:04.417Z",
+      "deliveredAt": "2026-09-11T18:10:04.418Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "13efb5b0-8f4b-4540-9bbd-ae7233f00799",
+      "recipientId": "contact-002",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Emergency cancelled",
+      "body": "Ananya cancelled the emergency alert.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "createdAt": "2026-09-11T18:10:04.414Z",
+      "deliveredAt": "2026-09-11T18:10:04.416Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "3665b553-aa9b-4506-8838-72db5360e265",
+      "recipientId": "contact-001",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Emergency cancelled",
+      "body": "Ananya cancelled the emergency alert.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "createdAt": "2026-09-11T18:10:04.412Z",
+      "deliveredAt": "2026-09-11T18:10:04.413Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "dde3fc24-f386-4c1c-9a0c-9aa8cac3ae0d",
+      "recipientId": "contact-004",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "createdAt": "2026-09-11T18:08:08.062Z",
+      "deliveredAt": "2026-09-11T18:08:08.063Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "2aebeeb4-ca55-4648-aba7-514f9b3b5624",
+      "recipientId": "contact-002",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "createdAt": "2026-09-11T18:08:08.061Z",
+      "deliveredAt": "2026-09-11T18:08:08.062Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "55928a7b-ef05-4a27-9344-01d00f81ad73",
+      "recipientId": "contact-001",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "createdAt": "2026-09-11T18:08:08.059Z",
+      "deliveredAt": "2026-09-11T18:08:08.060Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "9ea200f7-f38b-48eb-8a9b-14545e974635",
+      "recipientId": "contact-005",
+      "type": "JOURNEY_COMPLETED",
+      "title": "Journey completed safely",
+      "body": "Ananya reached Gachibowli.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "JOURNEY",
+      "relatedId": "journey-001",
+      "createdAt": "2026-09-10T07:06:38.581Z",
+      "deliveredAt": "2026-09-10T07:06:38.582Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "6b4ef649-34a4-422e-8e92-538bff45d373",
+      "recipientId": "contact-001",
+      "type": "JOURNEY_COMPLETED",
+      "title": "Journey completed safely",
+      "body": "Ananya reached Gachibowli.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "JOURNEY",
+      "relatedId": "journey-001",
+      "createdAt": "2026-09-10T07:06:38.579Z",
+      "deliveredAt": "2026-09-10T07:06:38.580Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "28ec6551-5fe5-4327-bf6a-bb5f3cd44a91",
+      "recipientId": "contact-005",
+      "type": "JOURNEY_COMPLETED",
+      "title": "Journey completed safely",
+      "body": "Ananya reached st.anthony.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "JOURNEY",
+      "relatedId": "2dc9ac67-e270-45cd-975f-fdf92b07e8d7",
+      "createdAt": "2026-09-10T07:06:35.798Z",
+      "deliveredAt": "2026-09-10T07:06:35.799Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "455bf01b-66b7-422a-9229-fc45c69bf343",
+      "recipientId": "contact-001",
+      "type": "JOURNEY_COMPLETED",
+      "title": "Journey completed safely",
+      "body": "Ananya reached st.anthony.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "JOURNEY",
+      "relatedId": "2dc9ac67-e270-45cd-975f-fdf92b07e8d7",
+      "createdAt": "2026-09-10T07:06:35.796Z",
+      "deliveredAt": "2026-09-10T07:06:35.797Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "37fbc83b-571c-4c00-8d8c-97002eda4f75",
+      "recipientId": "contact-004",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "createdAt": "2026-09-10T07:06:32.158Z",
+      "deliveredAt": "2026-09-10T07:06:32.158Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "eee0478e-acd9-44d6-980f-2deab3d0dd1d",
+      "recipientId": "contact-002",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "createdAt": "2026-09-10T07:06:32.157Z",
+      "deliveredAt": "2026-09-10T07:06:32.158Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "8b926623-08b7-45cf-a1a3-ce5ae13f2731",
+      "recipientId": "contact-001",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "createdAt": "2026-09-10T07:06:32.157Z",
+      "deliveredAt": "2026-09-10T07:06:32.157Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "c6a0a662-1712-4936-983e-bbd4556a3b44",
+      "recipientId": "contact-004",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "createdAt": "2026-09-10T07:06:22.526Z",
+      "deliveredAt": "2026-09-10T07:06:22.526Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "910116a7-22e9-4147-837c-5fce54000a17",
+      "recipientId": "contact-002",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "createdAt": "2026-09-10T07:06:22.525Z",
+      "deliveredAt": "2026-09-10T07:06:22.525Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "0a806ba9-3f59-4e63-98c2-d350b493d010",
+      "recipientId": "contact-001",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "createdAt": "2026-09-10T07:06:22.525Z",
+      "deliveredAt": "2026-09-10T07:06:22.525Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "85531483-f584-4705-8e63-dda4225f1a7b",
+      "recipientId": "contact-005",
+      "type": "JOURNEY_COMPLETED",
+      "title": "Journey completed safely",
+      "body": "Ananya reached RGIA Airport.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "JOURNEY",
+      "relatedId": "journey-003",
+      "createdAt": "2026-09-10T07:06:08.730Z",
+      "deliveredAt": "2026-09-10T07:06:08.731Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "96d6c30b-8ab9-444e-9611-9c0e2277e4fb",
+      "recipientId": "contact-001",
+      "type": "JOURNEY_COMPLETED",
+      "title": "Journey completed safely",
+      "body": "Ananya reached RGIA Airport.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "JOURNEY",
+      "relatedId": "journey-003",
+      "createdAt": "2026-09-10T07:06:08.728Z",
+      "deliveredAt": "2026-09-10T07:06:08.729Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "fd42f87d-f5fc-4d92-a1c8-92ee63352dc5",
+      "recipientId": "contact-005",
+      "type": "JOURNEY_STARTED",
+      "title": "Ananya started a journey",
+      "body": "newbus stop → st.anthony.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "JOURNEY",
+      "relatedId": "2dc9ac67-e270-45cd-975f-fdf92b07e8d7",
+      "createdAt": "2026-09-10T07:05:51.993Z",
+      "deliveredAt": "2026-09-10T07:05:51.994Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "6ffb1b87-aea3-4218-9ae9-950b8e3d2edf",
+      "recipientId": "contact-004",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "createdAt": "2026-09-09T13:10:46.107Z",
+      "deliveredAt": "2026-09-09T13:10:46.108Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "2bf8f524-750b-48d6-8d0f-230cd7116a8c",
+      "recipientId": "contact-002",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "createdAt": "2026-09-09T13:10:46.106Z",
+      "deliveredAt": "2026-09-09T13:10:46.106Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "ca403248-fbfa-4207-92c8-17cfdb717b9f",
+      "recipientId": "contact-001",
+      "type": "EMERGENCY_RESOLVED",
+      "title": "Marked safe",
+      "body": "Ananya has marked themselves safe.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "createdAt": "2026-09-09T13:10:46.104Z",
+      "deliveredAt": "2026-09-09T13:10:46.105Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "65ba142e-0398-41d2-ab84-f2f364920d78",
+      "recipientId": "contact-004",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "createdAt": "2026-09-09T13:10:04.563Z",
+      "deliveredAt": "2026-09-09T13:10:04.563Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "3eb1ecc5-c653-4f7a-9732-96896d8aea32",
+      "recipientId": "contact-002",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "createdAt": "2026-09-09T13:10:04.561Z",
+      "deliveredAt": "2026-09-09T13:10:04.562Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "7293ec37-52bb-44f1-8079-47d405a7e50f",
+      "recipientId": "contact-001",
+      "type": "SOS_ACTIVATED",
+      "title": "Emergency alert from Ananya",
+      "body": "Status: ACTIVE. Last known location is available in the secure link.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "EMERGENCY",
+      "relatedId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "createdAt": "2026-09-09T13:10:04.560Z",
+      "deliveredAt": "2026-09-09T13:10:04.560Z",
+      "error": "DEMO_PROVIDER: no external credential configured"
+    },
+    {
+      "id": "notification-001",
+      "userId": "demo-user-001",
+      "type": "JOURNEY_STARTED",
+      "title": "Journey started",
+      "body": "Maya can see your trip to Gachibowli.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "relatedType": "JOURNEY",
+      "relatedId": "journey-001",
+      "createdAt": "2026-09-08T17:15:46.535Z",
+      "deliveredAt": "2026-09-08T17:15:46.535Z"
+    },
+    {
+      "id": "notification-002",
+      "userId": "demo-user-001",
+      "type": "CHECK_IN",
+      "title": "You are doing great",
+      "body": "Your last check-in was 12 minutes ago.",
+      "channel": "PUSH",
+      "status": "DELIVERED",
+      "createdAt": "2026-09-08T17:27:46.535Z",
+      "deliveredAt": "2026-09-08T17:27:46.535Z"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "40d80fc0-02b8-4a0f-ba6e-3ad41195cf17",
+      "userId": "demo-user-001",
+      "emergencyId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "type": "VIDEO",
+      "fileName": "abhaya-1789150176602.webm",
+      "mimeType": "video/webm",
+      "sizeBytes": 1,
+      "status": "READY",
+      "retentionUntil": "2026-10-11T18:09:36.610Z",
+      "createdAt": "2026-09-11T18:09:36.610Z"
+    },
+    {
+      "id": "27d4066e-4e58-4bb6-a0b1-7d5632b98dc8",
+      "userId": "demo-user-001",
+      "emergencyId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "type": "AUDIO",
+      "fileName": "abhaya-1789150117785.webm",
+      "mimeType": "audio/webm",
+      "sizeBytes": 1,
+      "status": "READY",
+      "retentionUntil": "2026-10-11T18:08:37.793Z",
+      "createdAt": "2026-09-11T18:08:37.793Z"
+    }
+  ],
+  "shareLinks": [
+    {
+      "id": "73450e86-6809-429e-83e4-82364c3c2e4b",
+      "ownerId": "demo-user-001",
+      "emergencyId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "tokenHash": "4c442f6786d4cb915f13e523944259a0b44f65ab39cc32c7dfa447f6cd41e572",
+      "expiresAt": "2026-09-10T13:10:04.565Z",
+      "createdAt": "2026-09-09T13:10:04.565Z"
+    },
+    {
+      "id": "4cad065b-93ba-4a34-ad4d-ff58881310b1",
+      "ownerId": "demo-user-001",
+      "emergencyId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "tokenHash": "c195babb9900e83b54bdb546da4eb57d32fd99b6f484842388b970eb7ba6f0c7",
+      "expiresAt": "2026-09-11T07:06:22.526Z",
+      "createdAt": "2026-09-10T07:06:22.526Z"
+    },
+    {
+      "id": "0f412438-fa9b-45db-9759-b85f442a2902",
+      "ownerId": "demo-user-001",
+      "emergencyId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "tokenHash": "7289e53901d3a665eb89645f3f35bfd5a779cbb08cd92bb9a8bf1fc7ebc5d1e8",
+      "expiresAt": "2026-09-12T18:08:08.064Z",
+      "createdAt": "2026-09-11T18:08:08.064Z"
+    },
+    {
+      "id": "b82f7fe8-fbf3-479a-ad43-b37033bacb9f",
+      "ownerId": "demo-user-001",
+      "emergencyId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "tokenHash": "d8e139d0409b12b8d7d97beda89bcfd22878daac6095eb868345f56411710dd7",
+      "expiresAt": "2026-09-12T18:10:10.787Z",
+      "createdAt": "2026-09-11T18:10:10.787Z"
+    },
+    {
+      "id": "51d67c23-32d2-4126-a194-8fec05e26a4e",
+      "ownerId": "demo-user-001",
+      "emergencyId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "tokenHash": "610569ec09dc2f1dcfee38b5dddf72ab5ed3307eaebbff4c783b85ef8836018d",
+      "expiresAt": "2026-09-12T19:00:59.545Z",
+      "createdAt": "2026-09-11T19:00:59.545Z"
+    },
+    {
+      "id": "742263af-09be-4305-82f1-74baef24eff4",
+      "ownerId": "demo-user-001",
+      "emergencyId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "tokenHash": "3fdaee96b8cdb1c649586a6bf38b2223e6e43b18c0155a489394b009a9aebd19",
+      "expiresAt": "2026-09-13T13:49:51.860Z",
+      "createdAt": "2026-09-12T13:49:51.860Z"
+    }
+  ],
+  "resources": [
+    {
+      "id": "resource-001",
+      "name": "Banjara Hills Police Station",
+      "type": "POLICE",
+      "address": "Road No. 12, Banjara Hills",
+      "phone": "100",
+      "latitude": 17.4122,
+      "longitude": 78.4482,
+      "verified": true,
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "resource-002",
+      "name": "Apollo Hospitals Jubilee Hills",
+      "type": "HOSPITAL",
+      "address": "Film Nagar, Jubilee Hills",
+      "phone": "040 2360 7777",
+      "latitude": 17.4239,
+      "longitude": 78.4071,
+      "verified": true,
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "resource-003",
+      "name": "MedPlus Pharmacy",
+      "type": "PHARMACY",
+      "address": "Road No. 36, Jubilee Hills",
+      "phone": "040 4011 2200",
+      "latitude": 17.4318,
+      "longitude": 78.4078,
+      "verified": true,
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    },
+    {
+      "id": "resource-004",
+      "name": "Sakhi One Stop Centre",
+      "type": "SHELTER",
+      "address": "Nampally, Hyderabad",
+      "phone": "181",
+      "latitude": 17.385,
+      "longitude": 78.473,
+      "verified": true,
+      "createdAt": "2026-09-08T17:39:45.947Z",
+      "updatedAt": "2026-09-08T17:39:45.947Z"
+    }
+  ],
+  "audits": [
+    {
+      "id": "d285db5a-820c-4078-925c-a4bb767828c9",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_RESOLVED",
+      "entityType": "EMERGENCY",
+      "entityId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "createdAt": "2026-09-12T13:50:10.048Z"
+    },
+    {
+      "id": "8fe43e7f-cfd6-4b03-8e96-d61dee469f29",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_CREATED",
+      "entityType": "EMERGENCY",
+      "entityId": "4c180cb2-e92e-4711-86fd-a39811d9e28e",
+      "metadata": {
+        "source": "SOS"
+      },
+      "createdAt": "2026-09-12T13:49:51.860Z"
+    },
+    {
+      "id": "530ca2d0-cc9c-44df-b61b-27b0bc2cc3c3",
+      "actorId": "demo-user-001",
+      "action": "USER_LOGGED_IN",
+      "entityType": "USER",
+      "entityId": "demo-user-001",
+      "ipAddress": "127.0.0.1",
+      "createdAt": "2026-09-12T13:48:57.256Z"
+    },
+    {
+      "id": "a242b5b6-08ba-48ec-9e94-4e398cc95405",
+      "actorId": "demo-user-001",
+      "action": "USER_LOGGED_IN",
+      "entityType": "USER",
+      "entityId": "demo-user-001",
+      "ipAddress": "172.20.10.2",
+      "createdAt": "2026-09-12T03:07:04.870Z"
+    },
+    {
+      "id": "ac4cd7e7-4990-4508-b903-f2adb9b1fd02",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_RESOLVED",
+      "entityType": "EMERGENCY",
+      "entityId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "createdAt": "2026-09-11T19:01:07.075Z"
+    },
+    {
+      "id": "6c6b10eb-4004-46e8-b23d-3ec83514cd1d",
+      "actorId": "demo-user-001",
+      "action": "USER_LOGGED_IN",
+      "entityType": "USER",
+      "entityId": "demo-user-001",
+      "ipAddress": "172.20.10.1",
+      "createdAt": "2026-09-11T19:01:05.940Z"
+    },
+    {
+      "id": "1c51b7d6-b87a-4425-9d65-beabe7d362aa",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_CREATED",
+      "entityType": "EMERGENCY",
+      "entityId": "8d621bb7-8922-4ff7-a6da-b5041f62ca8b",
+      "metadata": {
+        "source": "SOS"
+      },
+      "createdAt": "2026-09-11T19:00:59.546Z"
+    },
+    {
+      "id": "0c0452eb-cad8-407a-a8bb-04a762b2a0c5",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_RESOLVED",
+      "entityType": "EMERGENCY",
+      "entityId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "createdAt": "2026-09-11T19:00:51.607Z"
+    },
+    {
+      "id": "ab2436c2-393e-4666-959f-2c2f0068c72d",
+      "actorId": "demo-user-001",
+      "action": "USER_LOGGED_IN",
+      "entityType": "USER",
+      "entityId": "demo-user-001",
+      "ipAddress": "172.20.10.1",
+      "createdAt": "2026-09-11T18:57:04.744Z"
+    },
+    {
+      "id": "06ce73d5-c3ba-464e-9f3a-1094214dcf20",
+      "actorId": "demo-user-001",
+      "action": "USER_LOGGED_IN",
+      "entityType": "USER",
+      "entityId": "demo-user-001",
+      "ipAddress": "172.20.10.2",
+      "createdAt": "2026-09-11T18:55:34.145Z"
+    },
+    {
+      "id": "24d71acd-270f-43ff-956b-a89b3361c605",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_CREATED",
+      "entityType": "EMERGENCY",
+      "entityId": "61e64f7e-c91f-49db-9884-a10b0deb83fe",
+      "metadata": {
+        "source": "SILENT_SOS"
+      },
+      "createdAt": "2026-09-11T18:10:10.788Z"
+    },
+    {
+      "id": "6d66f6b1-a60f-4cda-a4f2-08a0f8035630",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_CREATED",
+      "entityType": "EMERGENCY",
+      "entityId": "0e034584-1a56-40b9-8f36-9d5336c59c2e",
+      "metadata": {
+        "source": "SOS"
+      },
+      "createdAt": "2026-09-11T18:08:08.065Z"
+    },
+    {
+      "id": "73f9eaee-0ffc-4b5b-96f7-8b6ef0c6ecb5",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_RESOLVED",
+      "entityType": "EMERGENCY",
+      "entityId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "createdAt": "2026-09-10T07:06:32.159Z"
+    },
+    {
+      "id": "d31f277d-1c15-4007-a4fe-a7f4064b77d6",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_CREATED",
+      "entityType": "EMERGENCY",
+      "entityId": "868424ca-0adc-4876-80c9-c18a144d67da",
+      "metadata": {
+        "source": "SOS"
+      },
+      "createdAt": "2026-09-10T07:06:22.527Z"
+    },
+    {
+      "id": "aa2c39d3-4393-44da-970f-c6501aacdd1d",
+      "actorId": "demo-user-001",
+      "action": "USER_LOGGED_IN",
+      "entityType": "USER",
+      "entityId": "demo-user-001",
+      "ipAddress": "127.0.0.1",
+      "createdAt": "2026-09-10T07:04:23.251Z"
+    },
+    {
+      "id": "246c4384-b70e-4d12-862c-0ba2e44958b9",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_RESOLVED",
+      "entityType": "EMERGENCY",
+      "entityId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "createdAt": "2026-09-09T13:10:46.109Z"
+    },
+    {
+      "id": "6faa75d6-081b-4527-b18c-a533ba011ec2",
+      "actorId": "demo-user-001",
+      "action": "EMERGENCY_CREATED",
+      "entityType": "EMERGENCY",
+      "entityId": "ecab584b-5cec-420c-bb7c-b0cfdecf01b6",
+      "metadata": {
+        "source": "SOS"
+      },
+      "createdAt": "2026-09-09T13:10:04.566Z"
+    },
+    {
+      "id": "e47a2f66-5422-400c-8419-2d6cc83de986",
+      "actorId": "demo-user-001",
+      "action": "USER_LOGGED_IN",
+      "entityType": "USER",
+      "entityId": "demo-user-001",
+      "ipAddress": "127.0.0.1",
+      "createdAt": "2026-09-09T13:08:19.383Z"
+    }
+  ]
+}

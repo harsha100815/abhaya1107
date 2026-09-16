@@ -1,0 +1,357 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  CONTACT
+  ADMIN
+}
+enum EmergencyState {
+  CREATED
+  COUNTDOWN
+  ACTIVE
+  ACKNOWLEDGED
+  RESOLVED
+  CANCELLED
+}
+enum EmergencySource {
+  SOS
+  SILENT_SOS
+  TIMER
+  JOURNEY
+}
+enum JourneyState {
+  PLANNED
+  ACTIVE
+  OVERDUE
+  COMPLETED
+  CANCELLED
+}
+enum TimerState {
+  RUNNING
+  GRACE
+  CONFIRMED
+  ESCALATED
+  CANCELLED
+}
+enum DeliveryState {
+  PENDING
+  PARTIAL
+  DELIVERED
+  FAILED
+}
+enum NotificationStatus {
+  QUEUED
+  SENT
+  DELIVERED
+  FAILED
+}
+enum Channel {
+  PUSH
+  SMS
+  EMAIL
+}
+enum EvidenceType {
+  AUDIO
+  VIDEO
+}
+enum EvidenceStatus {
+  UPLOADING
+  READY
+  FAILED
+  DELETED
+}
+enum ResourceType {
+  POLICE
+  HOSPITAL
+  PHARMACY
+  SHELTER
+  OTHER
+}
+
+model User {
+  id              String             @id @default(uuid()) @db.Uuid
+  fullName        String
+  email           String             @unique
+  phone           String             @unique
+  passwordHash    String
+  role            Role               @default(USER)
+  avatar          String?
+  city            String?
+  settings        Json               @default("{}")
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  devices         UserDevice[]
+  sessions        Session[]
+  contacts        TrustedContact[]
+  emergencies     EmergencyEvent[]
+  journeys        SafetyJourney[]
+  timers          SafetyTimer[]
+  checkIns        CheckIn[]
+  notifications   Notification[]
+  evidence        EvidenceFile[]
+  shareLinks      EmergencyShareLink[]
+  audits          AuditLog[]
+}
+
+model UserDevice {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @db.Uuid
+  label      String
+  platform   String
+  pushToken  String?
+  lastSeenAt DateTime
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+}
+
+model Session {
+  id               String    @id @default(uuid()) @db.Uuid
+  userId           String    @db.Uuid
+  refreshTokenHash String    @unique
+  userAgent        String?
+  ipAddress        String?
+  expiresAt        DateTime
+  revokedAt        DateTime?
+  createdAt        DateTime  @default(now())
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, expiresAt])
+}
+
+model TrustedContact {
+  id         String   @id @default(uuid()) @db.Uuid
+  ownerId    String   @db.Uuid
+  name       String
+  phone      String
+  email      String?
+  relationship String
+  verified   Boolean  @default(false)
+  priority   Int      @default(1)
+  receives   Json     @default("[]")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  owner      User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  @@index([ownerId, priority])
+}
+
+model ContactInvitation {
+  id         String   @id @default(uuid()) @db.Uuid
+  ownerId    String   @db.Uuid
+  contactId  String?  @db.Uuid
+  tokenHash  String   @unique
+  email      String?
+  phone      String?
+  status     String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  @@index([ownerId, status])
+}
+
+model EmergencyEvent {
+  id              String                    @id @default(uuid()) @db.Uuid
+  userId          String                    @db.Uuid
+  status          EmergencyState
+  source          EmergencySource
+  latitude        Decimal?                  @db.Decimal(10, 7)
+  longitude       Decimal?                  @db.Decimal(10, 7)
+  accuracy        Decimal?                  @db.Decimal(10, 2)
+  lastLocationAt  DateTime?
+  shareTokenHash  String?
+  shareExpiresAt  DateTime?
+  shareRevokedAt  DateTime?
+  deliveryState   DeliveryState
+  activatedAt     DateTime?
+  resolvedAt      DateTime?
+  note            String?
+  createdAt       DateTime                  @default(now())
+  updatedAt       DateTime                  @updatedAt
+  user            User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  statusHistory   EmergencyStatusHistory[]
+  @@index([userId, status])
+  @@index([status, createdAt])
+  @@index([shareTokenHash])
+}
+
+model EmergencyStatusHistory {
+  id          String          @id @default(uuid()) @db.Uuid
+  emergencyId String          @db.Uuid
+  from        EmergencyState?
+  to          EmergencyState
+  actorId     String?         @db.Uuid
+  reason      String?
+  createdAt   DateTime        @default(now())
+  emergency   EmergencyEvent  @relation(fields: [emergencyId], references: [id], onDelete: Cascade)
+  @@index([emergencyId, createdAt])
+}
+
+model SafetyJourney {
+  id                   String          @id @default(uuid()) @db.Uuid
+  userId               String          @db.Uuid
+  title                String
+  origin               String
+  destination          String
+  expectedArrival      DateTime
+  status               JourneyState
+  progress             Decimal         @default(0) @db.Decimal(5, 2)
+  distanceRemainingKm  Decimal?        @db.Decimal(8, 2)
+  eta                  String?
+  contactIds           Json            @default("[]")
+  locationSessionId    String          @unique
+  anomaly              Json?
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+  completedAt          DateTime?
+  user                 User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  locations            JourneyLocation[]
+  events               JourneyEvent[]
+  @@index([userId, status])
+  @@index([status, expectedArrival])
+}
+
+model JourneyLocation {
+  id          String        @id @default(uuid()) @db.Uuid
+  journeyId   String        @db.Uuid
+  latitude    Decimal       @db.Decimal(10, 7)
+  longitude   Decimal       @db.Decimal(10, 7)
+  accuracy    Decimal?      @db.Decimal(10, 2)
+  speed       Decimal?      @db.Decimal(8, 2)
+  heading     Decimal?      @db.Decimal(8, 2)
+  recordedAt  DateTime
+  journey     SafetyJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  @@index([journeyId, recordedAt])
+}
+
+model JourneyEvent {
+  id        String        @id @default(uuid()) @db.Uuid
+  journeyId String        @db.Uuid
+  type      String
+  payload   Json?
+  createdAt DateTime      @default(now())
+  journey   SafetyJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  @@index([journeyId, createdAt])
+}
+
+model SafetyTimer {
+  id            String      @id @default(uuid()) @db.Uuid
+  userId        String      @db.Uuid
+  label         String
+  durationMinutes Int
+  expiresAt     DateTime
+  graceUntil    DateTime?
+  status        TimerState
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, status])
+  @@index([status, expiresAt])
+}
+
+model CheckIn {
+  id          String          @id @default(uuid()) @db.Uuid
+  userId      String          @db.Uuid
+  emergencyId String?         @db.Uuid
+  journeyId   String?         @db.Uuid
+  timerId     String?         @db.Uuid
+  message     String?
+  latitude    Decimal?        @db.Decimal(10, 7)
+  longitude   Decimal?        @db.Decimal(10, 7)
+  createdAt   DateTime        @default(now())
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, createdAt])
+}
+
+model EvidenceFile {
+  id             String         @id @default(uuid()) @db.Uuid
+  userId         String         @db.Uuid
+  emergencyId    String?        @db.Uuid
+  type           EvidenceType
+  fileName       String
+  mimeType       String
+  sizeBytes      Int
+  storageKey     String?
+  status         EvidenceStatus
+  retentionUntil DateTime
+  createdAt      DateTime       @default(now())
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, createdAt])
+  @@index([retentionUntil])
+}
+
+model EmergencyShareLink {
+  id           String    @id @default(uuid()) @db.Uuid
+  ownerId      String    @db.Uuid
+  emergencyId  String?   @db.Uuid
+  journeyId    String?   @db.Uuid
+  tokenHash    String    @unique
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  createdAt    DateTime  @default(now())
+  owner        User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  @@index([tokenHash, expiresAt])
+}
+
+model Notification {
+  id            String             @id @default(uuid()) @db.Uuid
+  userId        String?            @db.Uuid
+  recipientId   String?
+  type          String
+  title         String
+  body          String
+  channel       Channel
+  status        NotificationStatus
+  relatedType   String?
+  relatedId     String?
+  error         String?
+  createdAt     DateTime           @default(now())
+  deliveredAt   DateTime?
+  user          User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+}
+
+model SafetyResource {
+  id         String       @id @default(uuid()) @db.Uuid
+  name       String
+  type       ResourceType
+  address    String
+  phone      String?
+  latitude   Decimal      @db.Decimal(10, 7)
+  longitude  Decimal      @db.Decimal(10, 7)
+  verified   Boolean      @default(false)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  @@index([type, verified])
+}
+
+model Report {
+  id          String   @id @default(uuid()) @db.Uuid
+  reporterId  String?  @db.Uuid
+  type        String
+  status      String
+  description String
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([status, createdAt])
+}
+
+model AuditLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  actorId    String?  @db.Uuid
+  action     String
+  entityType String
+  entityId   String?
+  ipAddress  String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  @@index([actorId, createdAt])
+  @@index([entityType, entityId])
+}
