@@ -1,0 +1,231 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+}
+enum EmergencyStatus {
+  ACTIVE
+  CANCELLED
+  RESOLVED
+}
+enum JourneyStatus {
+  ACTIVE
+  OVERDUE
+  COMPLETED
+  CANCELLED
+}
+enum DeliveryStatus {
+  QUEUED
+  PROCESSING
+  ACCEPTED
+  DELIVERED
+  FAILED
+  UNKNOWN
+  TEST
+  CANCELLED
+  UNCONFIGURED
+}
+model User {
+  id String @id @default(uuid()) @db.Uuid
+  email String @unique
+  name String
+  passwordHash String
+  phone String?
+  emailVerifiedAt DateTime?
+  theme String @default("system")
+  pushEnabled Boolean @default(true)
+  securityEmails Boolean @default(true)
+  avatar Bytes?
+  avatarMime String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sessions Session[]
+  contacts EmergencyContact[]
+  emergencies EmergencyEvent[]
+  locations LocationUpdate[]
+  journeys SafetySession[]
+  incidents Incident[]
+  notifications Notification[]
+  devices Device[]
+  actionTokens ActionToken[]
+  grants ShareGrant[]
+}
+model Session {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+  refreshTokens RefreshToken[]
+  @@index([userId, revokedAt])
+}
+model RefreshToken {
+  id String @id @default(uuid()) @db.Uuid
+  sessionId String @db.Uuid
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  tokenHash String @unique
+  expiresAt DateTime
+  usedAt DateTime?
+  createdAt DateTime @default(now())
+  @@index([sessionId])
+}
+model ActionToken {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String @unique
+  purpose String
+  expiresAt DateTime
+  usedAt DateTime?
+  createdAt DateTime @default(now())
+  @@index([userId, purpose])
+}
+model EmergencyContact {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name String
+  phone String
+  email String?
+  isPrimary Boolean @default(false)
+  receivesAlerts Boolean @default(true)
+  consentAt DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  journeys SafetySession[]
+  @@unique([userId, phone])
+  @@index([userId])
+}
+model EmergencyEvent {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clientRequestId String @db.Uuid
+  status EmergencyStatus @default(ACTIVE)
+  testMode Boolean
+  shareLocation Boolean @default(false)
+  createdAt DateTime @default(now())
+  endedAt DateTime?
+  locations LocationUpdate[]
+  notifications Notification[]
+  grants ShareGrant[]
+  @@unique([userId, clientRequestId])
+  @@index([userId, createdAt])
+}
+model LocationUpdate {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clientRequestId String @db.Uuid
+  emergencyId String? @db.Uuid
+  emergency EmergencyEvent? @relation(fields: [emergencyId], references: [id], onDelete: Cascade)
+  safetySessionId String? @db.Uuid
+  safetySession SafetySession? @relation(fields: [safetySessionId], references: [id], onDelete: Cascade)
+  latitude Float
+  longitude Float
+  accuracy Float
+  capturedAt DateTime
+  createdAt DateTime @default(now())
+  @@unique([userId, clientRequestId])
+  @@index([emergencyId, capturedAt])
+  @@index([safetySessionId, capturedAt])
+  @@index([createdAt])
+}
+model SafetySession {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clientRequestId String @db.Uuid
+  contactId String? @db.Uuid
+  contact EmergencyContact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
+  destination String
+  expectedAt DateTime
+  status JourneyStatus @default(ACTIVE)
+  shareLocation Boolean @default(false)
+  testMode Boolean
+  lastCheckInAt DateTime?
+  escalationCount Int @default(0)
+  createdAt DateTime @default(now())
+  endedAt DateTime?
+  locations LocationUpdate[]
+  notifications Notification[]
+  grants ShareGrant[]
+  @@unique([userId, clientRequestId])
+  @@index([status, expectedAt])
+  @@index([userId, createdAt])
+}
+model Incident {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clientRequestId String @db.Uuid
+  category String
+  description String
+  occurredAt DateTime
+  latitude Float?
+  longitude Float?
+  evidence Bytes?
+  evidenceMime String?
+  evidenceConsentAt DateTime?
+  createdAt DateTime @default(now())
+  @@unique([userId, clientRequestId])
+  @@index([userId, createdAt])
+}
+model Notification {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  emergencyId String? @db.Uuid
+  emergency EmergencyEvent? @relation(fields: [emergencyId], references: [id], onDelete: Cascade)
+  safetySessionId String? @db.Uuid
+  safetySession SafetySession? @relation(fields: [safetySessionId], references: [id], onDelete: Cascade)
+  dedupeKey String @unique
+  kind String
+  channel String
+  recipient String
+  recipientLabel String
+  payload Bytes
+  testMode Boolean
+  status DeliveryStatus @default(QUEUED)
+  attempts Int @default(0)
+  leaseUntil DateTime?
+  nextAttemptAt DateTime @default(now())
+  providerId String?
+  errorCode String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([status, nextAttemptAt])
+  @@index([userId, createdAt])
+}
+model Device {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token String @unique
+  platform String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([userId])
+}
+model RateBucket {
+  key String @id
+  count Int @default(1)
+  expiresAt DateTime
+  @@index([expiresAt])
+}
+
+model ShareGrant {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String @unique
+  emergencyId String? @db.Uuid
+  emergency EmergencyEvent? @relation(fields: [emergencyId], references: [id], onDelete: Cascade)
+  safetySessionId String? @db.Uuid
+  safetySession SafetySession? @relation(fields: [safetySessionId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  @@index([userId])
+}

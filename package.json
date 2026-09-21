@@ -1,35 +1,62 @@
 {
-  "name": "abhaya-1107",
-  "version": "1.0.0",
+  "name": "abhaya1107",
+  "version": "0.1.0",
   "private": true,
-  "description": "ABHAYA 1107 privacy-first personal safety platform",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
+  "engines": {
+    "node": ">=22.18.0"
+  },
   "scripts": {
-    "dev": "concurrently -k -n API,WEB -c cyan,magenta \"npm:dev:api\" \"npm:dev:web\"",
-    "dev:api": "npm --workspace @abhaya/api run dev",
-    "dev:web": "npm --workspace @abhaya/web run dev",
-    "build": "npm run build:api && npm run build:web",
-    "build:api": "npm --workspace @abhaya/api run build",
-    "build:web": "npm --workspace @abhaya/web run build",
-    "start": "npm --workspace @abhaya/api run start",
-    "lint": "npm run lint:api && npm run lint:web",
-    "lint:api": "npm --workspace @abhaya/api run lint",
-    "lint:web": "npm --workspace @abhaya/web run lint",
-    "typecheck": "npm run typecheck:api && npm run typecheck:web",
-    "typecheck:api": "npm --workspace @abhaya/api run typecheck",
-    "typecheck:web": "npm --workspace @abhaya/web run typecheck",
-    "test": "npm --workspace @abhaya/api run test",
-    "db:migrate": "npm --workspace @abhaya/api run db:migrate",
-    "db:seed": "npm --workspace @abhaya/api run db:seed",
-    "docker:up": "docker compose up --build"
+    "dev": "concurrently -k -n api,worker,web \"npm run api\" \"npm run worker\" \"npm run web\"",
+    "api": "npm run dev -w @abhaya/api",
+    "worker": "npm run worker -w @abhaya/api",
+    "web": "npm run dev -w @abhaya/web",
+    "mobile": "npm run start -w @abhaya/mobile",
+    "lint": "eslint .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:e2e": "playwright test",
+    "build": "npm run build -w @abhaya/api && npm run build -w @abhaya/web",
+    "build:mobile": "npm run export -w @abhaya/mobile",
+    "db:generate": "npm run db:generate -w @abhaya/api",
+    "db:migrate": "npm run db:migrate -w @abhaya/api",
+    "db:deploy": "npm run db:deploy -w @abhaya/api",
+    "db:seed": "npm run db:seed -w @abhaya/api",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "setup": "node scripts/setup.mjs",
+    "test:local": "node scripts/test-local.mjs",
+    "test:e2e:local": "node scripts/test-e2e-local.mjs",
+    "assets": "node scripts/create-assets.mjs",
+    "check:mobile": "npm exec -w @abhaya/mobile -- expo install --check"
   },
   "devDependencies": {
-    "concurrently": "^9.2.4"
+    "@electric-sql/pglite": "^0.5.8",
+    "@electric-sql/pglite-socket": "^0.2.11",
+    "@eslint/js": "^9.39.0",
+    "@playwright/test": "^1.55.0",
+    "@sparticuz/chromium": "^153.0.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "~19.2.0",
+    "@types/react-dom": "~19.2.0",
+    "concurrently": "^9.2.0",
+    "eslint": "^9.39.0",
+    "prettier": "^3.6.0",
+    "tsx": "^4.20.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^3.2.0"
   },
-  "dependencies": {
-    "motion": "^13.2.0"
+  "overrides": {
+    "deepmerge-ts": "8.0.2",
+    "mysql2": "3.24.4",
+    "decode-uri-component": "0.5.0",
+    "xcode": {
+      "uuid": "11.1.1"
+    }
   }
 }

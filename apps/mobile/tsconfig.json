@@ -1,5 +1,8 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": { "jsx": "react-jsx", "module": "ESNext", "moduleResolution": "Bundler", "noEmit": true, "allowSyntheticDefaultImports": true, "types": ["react", "react-native"] },
-  "include": ["src"]
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

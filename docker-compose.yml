@@ -1,54 +1,19 @@
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: abhaya
-      POSTGRES_PASSWORD: abhaya_dev_password
-      POSTGRES_DB: abhaya
+      POSTGRES_USER: ${POSTGRES_USER:?Run npm run setup first}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a PostgreSQL password}
+      POSTGRES_DB: ${POSTGRES_DB:-abhaya}
     ports:
-      - "5432:5432"
+      - '127.0.0.1:5432:5432'
     volumes:
-      - abhaya_pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U abhaya -d abhaya"]
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
       interval: 5s
       timeout: 5s
-      retries: 10
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    volumes:
-      - abhaya_redisdata:/data
-
-  api:
-    build:
-      context: .
-      dockerfile: apps/api/Dockerfile
-    environment:
-      NODE_ENV: production
-      PORT: 4000
-      DATABASE_URL: postgresql://abhaya:abhaya_dev_password@postgres:5432/abhaya
-      DATABASE_MODE: postgres
-      WEB_ORIGIN: http://localhost:5173
-      JWT_ACCESS_SECRET: change-this-in-production
-      JWT_REFRESH_SECRET: change-this-too-in-production
-    depends_on:
-      postgres:
-        condition: service_healthy
-    ports:
-      - "4000:4000"
-
-  web:
-    build:
-      context: .
-      dockerfile: apps/web/Dockerfile
-    depends_on:
-      - api
-    ports:
-      - "5173:80"
-
+      retries: 20
 volumes:
-  abhaya_pgdata:
-  abhaya_redisdata:
+  postgres_data:

@@ -1,0 +1,9 @@
+package-lock.json
+node_modules
+.next
+.expo
+dist
+apps/api/src/generated
+playwright-report
+test-results
+.cache
