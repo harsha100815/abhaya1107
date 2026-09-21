@@ -43,3 +43,9 @@ The previous implementation is preserved on `main`; this rebuild uses a new data
 A local startup report showed API and worker database failures without actionable error codes. Added safe Prisma/PostgreSQL codes and fixed troubleshooting hints to server logs; query values, connection strings, exception messages and stacks remain excluded. Added `npm run db:status` and a read-only migration precheck before `npm run dev`.
 
 Follow-up validation passed: 21 unit tests (including three diagnostics/privacy cases), ESLint, API TypeScript and API build. A disposable empty PostgreSQL-WASM database returned exit 1 from the migration check; after `db:deploy`, the same check returned exit 0. The reporting user's database cause still needs confirmation from their migration/error output. No user database was reset or modified by this follow-up.
+
+## Local database isolation — 21 September 2026
+
+Subsequent user output confirmed Docker could not bind host port 5432 and Prisma returned P1010 from the existing server. Repeated clones also used the same directory basename and therefore the same default Compose project name. Added `POSTGRES_PORT` support and an explicit `npm run setup:db` recovery command that assigns this checkout a unique Compose project and an available local port, with matching API credentials. It preserves old containers/volumes and API secrets, backs up environment files and does not migrate data from any old database.
+
+ESLint and isolated configuration checks passed: two same-name checkouts receive different project identities; an occupied port is avoided; API and Compose settings match; credentials are not printed; secrets and backups are preserved; a second run leaves files unchanged; production mode and conflicting shell overrides are refused before writes. Container startup on the user's Mac still needs to be run there; no Docker daemon is available in this workspace.

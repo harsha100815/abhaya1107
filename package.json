@@ -31,6 +31,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "setup": "node scripts/setup.mjs",
+    "setup:db": "node scripts/isolate-database.mjs",
     "test:local": "node scripts/test-local.mjs",
     "test:e2e:local": "node scripts/test-e2e-local.mjs",
     "assets": "node scripts/create-assets.mjs",
