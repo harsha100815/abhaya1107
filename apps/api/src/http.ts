@@ -6,6 +6,7 @@ import pino from 'pino';
 import { db } from './db';
 import { env } from './env';
 import { hashToken, verifyAccess } from './security';
+import { safeErrorDetails } from './diagnostics';
 
 declare module 'express-serve-static-core' {
   interface Request {
@@ -137,10 +138,7 @@ export const errors: ErrorRequestHandler = (err: unknown, req, res, _next) => {
     message = 'The upload exceeds the allowed size.';
   }
   if (status >= 500)
-    logger.error(
-      { requestId: req.requestId, errorType: err instanceof Error ? err.name : 'unknown' },
-      'request failed',
-    );
+    logger.error({ requestId: req.requestId, ...safeErrorDetails(err) }, 'request failed');
   res
     .status(status)
     .json({ success: false, data: null, error: { code, message, requestId: req.requestId } });

@@ -1,6 +1,7 @@
 import { db } from './db';
 import { logger } from './http';
 import { escalateJourneys, processOutbox, purgeExpiredData } from './jobs';
+import { safeErrorDetails } from './diagnostics';
 let stopping = false;
 process.on('SIGTERM', () => {
   stopping = true;
@@ -18,8 +19,11 @@ async function run() {
         await purgeExpiredData();
         lastPurge = Date.now();
       }
-    } catch {
-      logger.error('worker cycle failed; queued work remains in PostgreSQL');
+    } catch (error) {
+      logger.error(
+        safeErrorDetails(error),
+        'worker cycle failed; queued work remains in PostgreSQL',
+      );
     }
     if (!stopping) await new Promise((resolve) => setTimeout(resolve, 3000));
   }

@@ -39,7 +39,7 @@ cd abhaya1107
 npm ci
 npm run setup
 npm run db:generate
-docker compose up -d postgres
+docker compose up -d --wait postgres
 npm run db:deploy
 npm run dev
 ```
@@ -62,25 +62,26 @@ Use an Expo development build for background location and remote notifications. 
 
 ## Commands
 
-| Command                          | Purpose                                                      |
-| -------------------------------- | ------------------------------------------------------------ |
-| `npm run dev`                    | API + worker + web                                           |
-| `npm run api` / `npm run worker` | Run services independently                                   |
-| `npm run web` / `npm run mobile` | Start clients                                                |
-| `npm run lint`                   | ESLint on project source                                     |
-| `npm run typecheck`              | Strict TypeScript across every workspace                     |
-| `npm test`                       | Unit tests                                                   |
-| `npm run test:local`             | Isolated PGlite PostgreSQL-WASM API integration tests        |
-| `npm run test:integration`       | API integration tests against `TEST_DATABASE_URL`            |
-| `npm run test:e2e:local`         | Isolated database/API/worker/browser stack and browser E2E   |
-| `npm run test:e2e`               | Browser E2E against an already-running TEST stack            |
-| `npm run build`                  | Production API and web builds                                |
-| `npm run build:mobile`           | Android + iOS JavaScript/Hermes exports, not native binaries |
-| `npm run check:mobile`           | Expo dependency compatibility                                |
-| `npm run format`                 | Format source with Prettier                                  |
-| `npm run db:generate`            | Generate Prisma client                                       |
-| `npm run db:migrate`             | Create a development migration                               |
-| `npm run db:deploy`              | Apply committed migrations                                   |
+| Command                          | Purpose                                                              |
+| -------------------------------- | -------------------------------------------------------------------- |
+| `npm run dev`                    | API + worker + web                                                   |
+| `npm run api` / `npm run worker` | Run services independently                                           |
+| `npm run web` / `npm run mobile` | Start clients                                                        |
+| `npm run lint`                   | ESLint on project source                                             |
+| `npm run typecheck`              | Strict TypeScript across every workspace                             |
+| `npm test`                       | Unit tests                                                           |
+| `npm run test:local`             | Isolated PGlite PostgreSQL-WASM API integration tests                |
+| `npm run test:integration`       | API integration tests against `TEST_DATABASE_URL`                    |
+| `npm run test:e2e:local`         | Isolated database/API/worker/browser stack and browser E2E           |
+| `npm run test:e2e`               | Browser E2E against an already-running TEST stack                    |
+| `npm run build`                  | Production API and web builds                                        |
+| `npm run build:mobile`           | Android + iOS JavaScript/Hermes exports, not native binaries         |
+| `npm run check:mobile`           | Expo dependency compatibility                                        |
+| `npm run format`                 | Format source with Prettier                                          |
+| `npm run db:generate`            | Generate Prisma client                                               |
+| `npm run db:migrate`             | Create a development migration                                       |
+| `npm run db:deploy`              | Apply committed migrations                                           |
+| `npm run db:status`              | Check database connection and migration status without changing data |
 
 All commands run from this repository's root unless an explicit `cd` is shown. Local test helpers use disposable PostgreSQL-WASM databases and cannot replace concurrency tests against standard PostgreSQL. CI includes a standard PostgreSQL 17 service.
 
@@ -202,6 +203,8 @@ The rebuild lives on `rebuild/fresh-start`. The previous `main` remains availabl
 
 ## Troubleshooting
 
+- **“Let’s reconnect” with Prisma errors in API/worker logs:** stop `npm run dev` with Ctrl+C. Run `docker compose up -d --wait postgres`, then `npm run db:status`. If migrations are pending, run `npm run db:deploy` and restart `npm run dev`. Startup now runs the read-only migration check first. Logs include safe Prisma/PostgreSQL codes and hints without query values, passwords or connection strings. If status/deploy fails, retain its error code and stop there; do not reset the database or delete its volume.
+- **Database authentication or port conflict:** an existing database may use different credentials, or another PostgreSQL instance may already own port 5432. Check `docker compose ps` and your API configuration against the actual server. Generating a new `.env` password does not change an existing PostgreSQL volume's password. Keep database credentials private when sharing error output.
 - **Cannot reach the API on a phone:** use your computer LAN address, keep both devices on a reachable network, allow the development port, and restart Metro after changing `.env`.
 - **GPS denied/timed out:** enable system GPS and review permissions in Settings; SOS remains available without coordinates. Accuracy and timestamps are shown; no coordinates are fabricated.
 - **SOS unconfirmed:** it may have reached the server before the connection failed. Refresh status or use the same request retry. Do not interpret a spinner or queued message as delivery.

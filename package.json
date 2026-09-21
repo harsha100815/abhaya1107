@@ -10,6 +10,7 @@
     "node": ">=22.18.0"
   },
   "scripts": {
+    "predev": "npm run db:status",
     "dev": "concurrently -k -n api,worker,web \"npm run api\" \"npm run worker\" \"npm run web\"",
     "api": "npm run dev -w @abhaya/api",
     "worker": "npm run worker -w @abhaya/api",
@@ -25,6 +26,7 @@
     "db:generate": "npm run db:generate -w @abhaya/api",
     "db:migrate": "npm run db:migrate -w @abhaya/api",
     "db:deploy": "npm run db:deploy -w @abhaya/api",
+    "db:status": "npm run db:status -w @abhaya/api",
     "db:seed": "npm run db:seed -w @abhaya/api",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

@@ -37,3 +37,9 @@ Root overrides pin patched `deepmerge-ts`, `mysql2`, `decode-uri-component` and 
 Run the standard PostgreSQL CI and container builds. Configure HTTPS endpoints, database backups/encryption, real delivery providers and monitoring. Link the EAS project, provide Maps/APNs/FCM/signing credentials, produce an Android preview APK, and complete the physical-device checklist. Verify delivery failures and receipts with consenting recipients before enabling LIVE mode. Phone-number ownership verification and verified public map/resource datasets are not implemented; the interface does not claim they are.
 
 The previous implementation is preserved on `main`; this rebuild uses a new database and does not import its JSON snapshots.
+
+## Database diagnostics follow-up — 21 September 2026
+
+A local startup report showed API and worker database failures without actionable error codes. Added safe Prisma/PostgreSQL codes and fixed troubleshooting hints to server logs; query values, connection strings, exception messages and stacks remain excluded. Added `npm run db:status` and a read-only migration precheck before `npm run dev`.
+
+Follow-up validation passed: 21 unit tests (including three diagnostics/privacy cases), ESLint, API TypeScript and API build. A disposable empty PostgreSQL-WASM database returned exit 1 from the migration check; after `db:deploy`, the same check returned exit 0. The reporting user's database cause still needs confirmation from their migration/error output. No user database was reset or modified by this follow-up.
