@@ -62,7 +62,11 @@ function Shell() {
   const query = useQuery({
     queryKey: ['dashboard'],
     queryFn: () => api.call('GET', '/dashboard', dashboardSchema),
-    refetchInterval: 10000,
+    // A confirmed sign-out must keep Auth mounted, including on focus/reconnect.
+    // Successful authentication resets this query and enables it again.
+    enabled: (query) =>
+      !(query.state.error instanceof ApiError && query.state.error.status === 401),
+    refetchInterval: (query) => (query.state.data ? 10000 : false),
     refetchOnWindowFocus: true,
   });
   const config = useQuery({
