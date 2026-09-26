@@ -61,9 +61,18 @@ function Shell() {
     [systemDark, setSystemDark] = useState(false);
   const query = useQuery({
     queryKey: ['dashboard'],
-    queryFn: () => api.call('GET', '/dashboard', dashboardSchema),
-    refetchInterval: 10000,
-    refetchOnWindowFocus: true,
+    queryFn: async () => {
+      try {
+        return await api.call('GET', '/dashboard', dashboardSchema);
+      } catch (error) {
+        // Signed out is a stable session state, not a transient loading error.
+        if (error instanceof ApiError && error.status === 401) return null;
+        throw error;
+      }
+    },
+    refetchInterval: (query) => (query.state.data ? 10000 : false),
+    refetchOnWindowFocus: (query) => query.state.data !== null,
+    refetchOnReconnect: (query) => query.state.data !== null,
   });
   const config = useQuery({
     queryKey: ['config'],
@@ -71,7 +80,7 @@ function Shell() {
     staleTime: 60000,
   });
   const data = query.data,
-    location = useLocation(data);
+    location = useLocation(data ?? undefined);
   useEffect(() => {
     const on = () => setOnline(navigator.onLine);
     on();
@@ -95,7 +104,7 @@ function Shell() {
           : 'light'
         : (data?.user.theme ?? 'light');
   }, [data?.user.theme, systemDark]);
-  if (query.error instanceof ApiError && query.error.status === 401)
+  if (data === null)
     return (
       <Auth
         onSuccess={() => {
