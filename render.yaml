@@ -1,0 +1,134 @@
+# yaml-language-server: $schema=https://render.com/schema/render.yaml.json
+# TEST preview only. The worker costs $7/month; the free database expires after
+# 30 days. Review docs/RENDER.md and the Dashboard estimate before applying.
+previews:
+  generation: 'off'
+
+projects:
+  - name: abhaya1107
+    environments:
+      - name: preview
+        services:
+          - type: web
+            name: abhaya1107-web-preview
+            runtime: node
+            region: singapore
+            plan: free
+            branch: rebuild/fresh-start
+            autoDeployTrigger: checksPass
+            buildCommand: npm ci --include=dev --workspace @abhaya/web --workspace @abhaya/client --workspace @abhaya/ui --workspace @abhaya/utils --workspace @abhaya/types --workspace @abhaya/validation --include-workspace-root && npm run build -w @abhaya/web
+            startCommand: API_URL="${API_ORIGIN}/api/v1" WEB_ORIGIN="$RENDER_EXTERNAL_URL" npm run start -w @abhaya/web
+            healthCheckPath: /
+            envVars:
+              - key: NODE_VERSION
+                value: '24'
+              - key: NODE_ENV
+                value: production
+              - key: NEXT_TELEMETRY_DISABLED
+                value: '1'
+              - key: NEXT_PUBLIC_MAP_TILE_URL
+                value: https://tile.openstreetmap.org/{z}/{x}/{y}.png
+              - key: API_ORIGIN
+                fromService:
+                  name: abhaya1107-api-preview
+                  type: web
+                  envVarKey: RENDER_EXTERNAL_URL
+
+          - type: web
+            name: abhaya1107-api-preview
+            runtime: node
+            region: singapore
+            plan: free
+            branch: rebuild/fresh-start
+            autoDeployTrigger: checksPass
+            buildCommand: npm ci --include=dev --workspace @abhaya/api --workspace @abhaya/types --workspace @abhaya/utils --workspace @abhaya/validation --include-workspace-root && npm run db:generate && npm run build -w @abhaya/api
+            # Free web services do not support a separate pre-deploy command.
+            # Start serving only after committed migrations have succeeded.
+            startCommand: npm run db:deploy && node apps/api/dist/server.js
+            healthCheckPath: /health
+            envVars:
+              - fromGroup: abhaya1107-preview-runtime
+              - key: DATABASE_URL
+                fromDatabase:
+                  name: abhaya1107-postgres-preview
+                  property: connectionString
+              - key: JWT_SECRET
+                sync: false
+              - key: DATA_ENCRYPTION_KEY
+                sync: false
+              - key: PUBLIC_WEB_URL
+                fromService:
+                  name: abhaya1107-web-preview
+                  type: web
+                  envVarKey: RENDER_EXTERNAL_URL
+              - key: CORS_ORIGINS
+                fromService:
+                  name: abhaya1107-web-preview
+                  type: web
+                  envVarKey: RENDER_EXTERNAL_URL
+              - key: TRUST_PROXY_HOPS
+                value: '1'
+
+          - type: worker
+            name: abhaya1107-worker-preview
+            runtime: node
+            region: singapore
+            # Background workers have no free plan. Applying creates a paid resource.
+            plan: starter
+            branch: rebuild/fresh-start
+            autoDeployTrigger: checksPass
+            buildCommand: npm ci --include=dev --workspace @abhaya/api --workspace @abhaya/types --workspace @abhaya/utils --workspace @abhaya/validation --include-workspace-root && npm run db:generate && npm run build -w @abhaya/api
+            startCommand: bash scripts/render-worker.sh
+            maxShutdownDelaySeconds: 30
+            envVars:
+              - fromGroup: abhaya1107-preview-runtime
+              - key: DATABASE_URL
+                fromDatabase:
+                  name: abhaya1107-postgres-preview
+                  property: connectionString
+              - key: JWT_SECRET
+                fromService:
+                  name: abhaya1107-api-preview
+                  type: web
+                  envVarKey: JWT_SECRET
+              - key: DATA_ENCRYPTION_KEY
+                fromService:
+                  name: abhaya1107-api-preview
+                  type: web
+                  envVarKey: DATA_ENCRYPTION_KEY
+              - key: PUBLIC_WEB_URL
+                fromService:
+                  name: abhaya1107-web-preview
+                  type: web
+                  envVarKey: RENDER_EXTERNAL_URL
+              - key: CORS_ORIGINS
+                fromService:
+                  name: abhaya1107-web-preview
+                  type: web
+                  envVarKey: RENDER_EXTERNAL_URL
+
+        databases:
+          - name: abhaya1107-postgres-preview
+            databaseName: abhaya_preview
+            user: abhaya
+            region: singapore
+            plan: free
+            postgresMajorVersion: '17'
+            ipAllowList: []
+
+        envVarGroups:
+          - name: abhaya1107-preview-runtime
+            envVars:
+              - key: NODE_VERSION
+                value: '24'
+              # Compiled API/worker in simulated TEST mode; production guard stays intact.
+              - key: NODE_ENV
+                value: development
+              - key: TEST_MODE_ONLY
+                value: 'true'
+              - key: DB_POOL_MAX
+                value: '5'
+              - key: LOCATION_RETENTION_DAYS
+                value: '7'
+              - key: LOG_LEVEL
+                value: info

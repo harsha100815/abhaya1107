@@ -165,6 +165,11 @@ The iOS command requires macOS/Xcode. EAS cloud builds require authentication an
 
 ## Deployment
 
+For a complete Render TEST preview, use the root `render.yaml` and follow
+[the Render deployment guide](docs/RENDER.md). It includes web, API, worker, and
+PostgreSQL. Review the worker's paid plan and the free database expiry before
+applying; this configuration is not a live emergency-service release.
+
 1. Provision a private production PostgreSQL database with encryption, backups and tested restores.
 2. Configure production API secrets, exact HTTPS origins and real providers in a secret manager.
 3. Apply migrations once as a release job, before starting the new application version.

@@ -55,3 +55,23 @@ ESLint and isolated configuration checks passed: two same-name checkouts receive
 Reproduced the reported input reset in Chromium: after the 10-second dashboard polling interval, a partially filled registration form lost its values. An unauthenticated query error was cleared during each refetch, causing the form to unmount while the loading screen appeared.
 
 Signed-out state is now cached explicitly as `null`; polling, focus and reconnect refreshes stop while signed out. Signing in explicitly reloads the dashboard, and authenticated dashboard polling remains enabled. The regression test failed before the change and passed afterward, retaining registration/login values, selected form mode and keyboard focus across polling intervals and focus events. All four browser flows passed after the change, as did ESLint, web TypeScript checks and the production web build. Hosting account access is still required for deployment; no deployed URL is claimed by these checks.
+
+## Render preview configuration — 26 September 2026
+
+Added a Render Blueprint for the web app, API, separately supervised worker, and
+PostgreSQL 17 in Singapore. The compiled API/worker remain in simulated TEST mode;
+the web uses its production build and secure cookies. Runtime URLs and shared
+worker secrets reference Render service values, and the database rejects public
+connections. The Blueprint documents the paid worker and free database expiry.
+
+Validated the formatted Blueprint against Render's published JSON Schema
+(downloaded on 26 September 2026), checked cross-resource references and shell
+syntax, and exercised worker startup against a disposable PGlite database. The
+worker stayed stopped before migrations, started after the API migration command
+succeeded, and completed a database cycle without worker errors. No application
+logic changed, so the preceding browser/build results remain applicable.
+
+The Render plugin was installed but exposed no callable deployment tools. The
+authorized browser fallback reached a GitHub social-login error after Google
+verification. Authenticated Render validation, cloud builds, service health,
+resource creation, and a public application URL are not completed or claimed.
