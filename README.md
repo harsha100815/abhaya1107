@@ -4,6 +4,8 @@ A fresh TypeScript personal-safety platform with an Expo mobile app, a Next.js w
 
 **Release status:** implemented and under validation, not yet approved for real emergency use. Read [the validation record](docs/VALIDATION.md) for executed checks and remaining device/provider gates. Android/iOS JavaScript exports are separate from signed native binaries. The default local environment is clearly labelled **TEST MODE** and never contacts anyone through an SOS test.
 
+For the current local cleanup and deployment handoff, see [deployment readiness](docs/DEPLOYMENT-READINESS.md).
+
 ## Architecture
 
 | Directory             | Responsibility                                                                                                    |
