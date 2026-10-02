@@ -41,13 +41,17 @@ export class HttpError extends Error {
 export const ok = <T>(res: Response, data: T, status = 200) =>
   res.status(status).json({ success: true, data, error: null });
 export const auth: RequestHandler = async (req, _res, next) => {
+  const rejected = () => limit('auth-invalid', 300, 60000)(req, _res, () => undefined);
   const bearer = req.headers.authorization;
-  if (!bearer?.startsWith('Bearer '))
+  if (!bearer?.startsWith('Bearer ')) {
+    await rejected();
     throw new HttpError(401, 'UNAUTHENTICATED', 'Sign in to continue.');
+  }
   let identity;
   try {
     identity = await verifyAccess(bearer.slice(7));
   } catch {
+    await rejected();
     throw new HttpError(401, 'SESSION_EXPIRED', 'Your session expired. Sign in again.');
   }
   const session = await db.session.findFirst({
@@ -59,7 +63,10 @@ export const auth: RequestHandler = async (req, _res, next) => {
     },
     select: { id: true },
   });
-  if (!session) throw new HttpError(401, 'SESSION_EXPIRED', 'Your session expired. Sign in again.');
+  if (!session) {
+    await rejected();
+    throw new HttpError(401, 'SESSION_EXPIRED', 'Your session expired. Sign in again.');
+  }
   req.auth = identity;
   next();
 };

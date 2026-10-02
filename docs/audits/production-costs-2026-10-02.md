@@ -10,7 +10,7 @@ Date: 2 October 2026. Scope: up to 1,000 users, Android and iPhone.
 - Added 15 provider-boundary tests, bringing unit tests to 36. These mock all network calls and do not send SMS, email or push.
 - Contained corrupt encrypted notification payloads so one bad queue record cannot interrupt the worker's remaining deliveries.
 - Explicit provider HTTP 4xx rejection (excluding ambiguous HTTP 408 timeout) is now FAILED; ambiguous network/5xx outcomes remain UNKNOWN and are never blindly resent. No automatic retry for failed/throttled notifications is promised.
-- Authenticated API limits now apply per account, avoiding one shared 300-request bucket for all signed-in web users. Public, authentication and tracking IP limits remain intact.
+- Authenticated API limits now apply per account, avoiding one shared 300-request bucket for all signed-in web users. Public, authentication and tracking IP limits remain intact. Rejected/missing session credentials also retain an IP limit; its exhaustion does not block signed-in accounts.
 - Added concurrent SOS retry and shared-IP regression checks; 16 database integration tests pass.
 - Maps support configured provider attribution and show tile-load failures while retaining coordinates.
 - API/worker and optimized web builds, lint and workspace type checks passed after these changes. Four browser E2E flows also passed after the API/rate-limit/map changes (59 seconds).

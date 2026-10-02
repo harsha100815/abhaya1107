@@ -200,6 +200,11 @@ describe.sequential('persisted safety API', () => {
     expect((await call('get', '/profile')).status).toBe(200);
     expect((await call('get', '/profile', other)).status).toBe(200);
     await db.rateBucket.deleteMany();
+    expect((await request(app).get('/api/v1/profile')).status).toBe(401);
+    await db.rateBucket.updateMany({ data: { count: 300 } });
+    expect((await request(app).get('/api/v1/profile')).status).toBe(429);
+    expect((await call('get', '/profile')).status).toBe(200);
+    await db.rateBucket.deleteMany();
   });
   it('rotates refresh tokens and revokes a replayed family', async () => {
     const rotated = await request(app).post('/api/v1/auth/refresh').send({ refreshToken: refresh });
