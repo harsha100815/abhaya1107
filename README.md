@@ -6,6 +6,8 @@ A fresh TypeScript personal-safety platform with an Expo mobile app, a Next.js w
 
 For the current local cleanup and deployment handoff, see [deployment readiness](docs/DEPLOYMENT-READINESS.md).
 
+For the 1,000-user paid budget and remaining live-release gates, read [the production audit](docs/audits/production-costs-2026-10-02.md).
+
 ## Architecture
 
 | Directory             | Responsibility                                                                                                    |

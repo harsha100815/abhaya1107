@@ -20,7 +20,7 @@ than applied to the SDK 55 rebuild.
 
 - Prisma client generation and committed database migration on temporary test databases.
 - ESLint and all workspace TypeScript checks.
-- 21 unit tests and 14 API integration tests.
+- 36 unit tests and 16 API integration tests after the production audit fixes.
 - API, worker, and optimized web builds; TypeScript checks and builds also passed
   on the deployment Node.js 24 runtime (24.21.0).
 - Android and iOS JavaScript exports (not signed native binaries).
@@ -28,6 +28,10 @@ than applied to the SDK 55 rebuild.
   denied GPS, and offline SOS recovery.
 - `render.yaml` validated against Render's current published JSON Schema.
 - Remote rebuild branch refreshed and matched the starting local commit `32f6921`.
+
+See [the production audit and paid cost estimate](audits/production-costs-2026-10-02.md)
+for the 1,000-user Android/iPhone scope. The separate `render.production.yaml` is
+a paid candidate and must not be applied before its release gates pass.
 
 ## Deployable scope and remaining steps
 

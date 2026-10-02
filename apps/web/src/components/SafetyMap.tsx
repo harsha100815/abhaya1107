@@ -34,7 +34,14 @@ export function SafetyMap({
           return;
         }
         map = L.map(container.current).setView([first.latitude, first.longitude], 14);
-        L.tileLayer(tiles, { attribution: '© OpenStreetMap contributors', maxZoom: 19 }).addTo(map);
+        L.tileLayer(tiles, {
+          attribution: process.env.NEXT_PUBLIC_MAP_ATTRIBUTION ?? '© OpenStreetMap contributors',
+          maxZoom: 19,
+        })
+          .on('tileerror', () => {
+            if (!cancelled) setError('Map tiles could not load. Coordinates remain available.');
+          })
+          .addTo(map);
         if (point)
           L.circleMarker([point.latitude, point.longitude], {
             radius: 10,

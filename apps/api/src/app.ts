@@ -35,8 +35,8 @@ export function createApp() {
       res.status(503).json({ status: 'unavailable', database: 'down' });
     }
   });
-  app.use('/api/v1', limit('global', 300, 60000));
-  app.get('/api/v1/config', (_req, res) =>
+  const publicLimit = limit('global', 300, 60000);
+  app.get('/api/v1/config', publicLimit, (_req, res) =>
     ok(res, {
       testOnly: env.TEST_MODE_ONLY,
       liveAlertsConfigured: !!(env.SMS_ACCOUNT_SID && env.SMS_AUTH_TOKEN && env.SMS_FROM),
@@ -44,9 +44,15 @@ export function createApp() {
       emergencyNumber: env.EMERGENCY_NUMBER ?? null,
     }),
   );
-  app.use('/api/v1/auth', authRouter);
-  app.use('/api/v1/tracking', trackingRouter);
-  app.use('/api/v1', auth);
+  app.use('/api/v1/auth', publicLimit, authRouter);
+  app.use('/api/v1/tracking', publicLimit, trackingRouter);
+  // A web proxy or shared mobile network must not pool all signed-in users
+  // into one 300-request bucket. Public endpoints retain their IP limits.
+  app.use(
+    '/api/v1',
+    auth,
+    limit('global-user', 300, 60000, (req) => req.auth.userId),
+  );
   app.use('/api/v1/profile', profileRouter);
   app.use('/api/v1/users/me', profileRouter);
   app.use('/api/v1/dashboard', dashboardRouter);

@@ -1,0 +1,180 @@
+# Paid production candidate; release gates: docs/audits/production-costs-2026-10-02.md
+# Render compute + 20 GB database storage estimate: US$82/month before usage and tax.
+projects:
+  - name: abhaya1107-production
+    environments:
+      - name: production
+        services:
+          - type: web
+            name: abhaya1107-web-production
+            runtime: node
+            region: singapore
+            plan: 1c-2g
+            branch: rebuild/fresh-start
+            autoDeployTrigger: checksPass
+            buildCommand: npm ci --include=dev --workspace @abhaya/web --workspace
+              @abhaya/client --workspace @abhaya/ui --workspace @abhaya/utils
+              --workspace @abhaya/types --workspace @abhaya/validation
+              --include-workspace-root && npm run build -w @abhaya/web
+            startCommand: API_URL="${API_ORIGIN}/api/v1" WEB_ORIGIN="$RENDER_EXTERNAL_URL"
+              npm run start -w @abhaya/web
+            healthCheckPath: /
+            envVars:
+              - key: NODE_VERSION
+                value: '24'
+              - key: NODE_ENV
+                value: production
+              - key: NEXT_TELEMETRY_DISABLED
+                value: '1'
+              - key: API_ORIGIN
+                fromService:
+                  name: abhaya1107-api-production
+                  type: web
+                  envVarKey: RENDER_EXTERNAL_URL
+              - key: NEXT_PUBLIC_MAP_TILE_URL
+                sync: false
+              - key: NEXT_PUBLIC_MAP_ATTRIBUTION
+                sync: false
+          - type: web
+            name: abhaya1107-api-production
+            runtime: node
+            region: singapore
+            plan: 1c-2g
+            branch: rebuild/fresh-start
+            autoDeployTrigger: checksPass
+            buildCommand: npm ci --include=dev --workspace @abhaya/api --workspace
+              @abhaya/types --workspace @abhaya/utils --workspace
+              @abhaya/validation --include-workspace-root && npm run db:generate
+              && npm run build -w @abhaya/api
+            startCommand: node apps/api/dist/server.js
+            healthCheckPath: /health
+            envVars:
+              - fromGroup: abhaya1107-production-runtime
+              - key: DATABASE_URL
+                fromDatabase:
+                  name: abhaya1107-postgres-production
+                  property: connectionString
+              - key: JWT_SECRET
+                sync: false
+              - key: DATA_ENCRYPTION_KEY
+                sync: false
+              - key: PUBLIC_WEB_URL
+                fromService:
+                  name: abhaya1107-web-production
+                  type: web
+                  envVarKey: RENDER_EXTERNAL_URL
+              - key: CORS_ORIGINS
+                fromService:
+                  name: abhaya1107-web-production
+                  type: web
+                  envVarKey: RENDER_EXTERNAL_URL
+              - key: TRUST_PROXY_HOPS
+                value: '1'
+              - key: SMS_ACCOUNT_SID
+                sync: false
+              - key: SMS_AUTH_TOKEN
+                sync: false
+              - key: SMS_FROM
+                sync: false
+              - key: EMAIL_API_KEY
+                sync: false
+              - key: EMAIL_FROM
+                sync: false
+              - key: EXPO_ACCESS_TOKEN
+                sync: false
+            preDeployCommand: npm run db:deploy
+          - type: worker
+            name: abhaya1107-worker-production
+            runtime: node
+            region: singapore
+            plan: 0.5c-512mb
+            branch: rebuild/fresh-start
+            autoDeployTrigger: checksPass
+            buildCommand: npm ci --include=dev --workspace @abhaya/api --workspace
+              @abhaya/types --workspace @abhaya/utils --workspace
+              @abhaya/validation --include-workspace-root && npm run db:generate
+              && npm run build -w @abhaya/api
+            startCommand: bash scripts/render-worker.sh
+            maxShutdownDelaySeconds: 30
+            envVars:
+              - fromGroup: abhaya1107-production-runtime
+              - key: DATABASE_URL
+                fromDatabase:
+                  name: abhaya1107-postgres-production
+                  property: connectionString
+              - key: JWT_SECRET
+                fromService:
+                  name: abhaya1107-api-production
+                  type: web
+                  envVarKey: JWT_SECRET
+              - key: DATA_ENCRYPTION_KEY
+                fromService:
+                  name: abhaya1107-api-production
+                  type: web
+                  envVarKey: DATA_ENCRYPTION_KEY
+              - key: PUBLIC_WEB_URL
+                fromService:
+                  name: abhaya1107-web-production
+                  type: web
+                  envVarKey: RENDER_EXTERNAL_URL
+              - key: CORS_ORIGINS
+                fromService:
+                  name: abhaya1107-web-production
+                  type: web
+                  envVarKey: RENDER_EXTERNAL_URL
+              - key: SMS_ACCOUNT_SID
+                fromService:
+                  name: abhaya1107-api-production
+                  type: web
+                  envVarKey: SMS_ACCOUNT_SID
+              - key: SMS_AUTH_TOKEN
+                fromService:
+                  name: abhaya1107-api-production
+                  type: web
+                  envVarKey: SMS_AUTH_TOKEN
+              - key: SMS_FROM
+                fromService:
+                  name: abhaya1107-api-production
+                  type: web
+                  envVarKey: SMS_FROM
+              - key: EMAIL_API_KEY
+                fromService:
+                  name: abhaya1107-api-production
+                  type: web
+                  envVarKey: EMAIL_API_KEY
+              - key: EMAIL_FROM
+                fromService:
+                  name: abhaya1107-api-production
+                  type: web
+                  envVarKey: EMAIL_FROM
+              - key: EXPO_ACCESS_TOKEN
+                fromService:
+                  name: abhaya1107-api-production
+                  type: web
+                  envVarKey: EXPO_ACCESS_TOKEN
+        databases:
+          - name: abhaya1107-postgres-production
+            databaseName: abhaya_production
+            user: abhaya
+            region: singapore
+            plan: 0.5c-1g
+            postgresMajorVersion: '17'
+            ipAllowList: []
+            diskSizeGB: 20
+        envVarGroups:
+          - name: abhaya1107-production-runtime
+            envVars:
+              - key: NODE_VERSION
+                value: '24'
+              - key: NODE_ENV
+                value: production
+              - key: TEST_MODE_ONLY
+                value: 'false'
+              - key: DB_POOL_MAX
+                value: '10'
+              - key: LOCATION_RETENTION_DAYS
+                value: '7'
+              - key: LOG_LEVEL
+                value: info
+previews:
+  generation: 'off'

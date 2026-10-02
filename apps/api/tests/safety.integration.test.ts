@@ -91,6 +91,20 @@ describe.sequential('persisted safety API', () => {
     const event = await call('get', `/sos/${sosId}`);
     expect(event.body.data.notifications[0].status).toBe('TEST');
   });
+  it('returns one SOS and outbox batch for concurrent retries', async () => {
+    const event = await db.emergencyEvent.findUniqueOrThrow({ where: { id: sosId } });
+    const results = await Promise.all(
+      Array.from({ length: 6 }, () =>
+        call('post', '/sos').send({
+          clientRequestId: event.clientRequestId,
+          testMode: true,
+          shareLocation: true,
+        }),
+      ),
+    );
+    expect(results.every((r) => r.status === 201 && r.body.data.id === sosId)).toBe(true);
+    expect(await db.notification.count({ where: { emergencyId: sosId } })).toBe(1);
+  });
   it('accepts fresh location only from the owner', async () => {
     const body = { clientRequestId: randomUUID(), emergencyId: sosId, location: location() };
     expect((await call('post', '/location', other).send(body)).status).toBe(409);
@@ -178,6 +192,15 @@ describe.sequential('persisted safety API', () => {
     expect((await request(app).post('/api/v1/auth/forgot-password').send({ email })).status).toBe(
       503,
     ));
+  it('keeps authenticated users available after a shared public IP hits its limit', async () => {
+    await db.rateBucket.deleteMany();
+    expect((await request(app).get('/api/v1/config')).status).toBe(200);
+    await db.rateBucket.updateMany({ data: { count: 300 } });
+    expect((await request(app).get('/api/v1/config')).status).toBe(429);
+    expect((await call('get', '/profile')).status).toBe(200);
+    expect((await call('get', '/profile', other)).status).toBe(200);
+    await db.rateBucket.deleteMany();
+  });
   it('rotates refresh tokens and revokes a replayed family', async () => {
     const rotated = await request(app).post('/api/v1/auth/refresh').send({ refreshToken: refresh });
     expect(rotated.status).toBe(200);

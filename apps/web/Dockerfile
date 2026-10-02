@@ -5,6 +5,8 @@ COPY . .
 RUN npm ci --workspace @abhaya/web --workspace @abhaya/client --workspace @abhaya/ui --workspace @abhaya/utils --workspace @abhaya/types --workspace @abhaya/validation --include-workspace-root
 ARG NEXT_PUBLIC_MAP_TILE_URL
 ENV NEXT_PUBLIC_MAP_TILE_URL=$NEXT_PUBLIC_MAP_TILE_URL
+ARG NEXT_PUBLIC_MAP_ATTRIBUTION
+ENV NEXT_PUBLIC_MAP_ATTRIBUTION=$NEXT_PUBLIC_MAP_ATTRIBUTION
 RUN npm run build -w @abhaya/web
 
 FROM node:24-bookworm-slim AS runtime

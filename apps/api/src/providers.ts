@@ -4,9 +4,14 @@ import { env } from './env';
 import { decrypt } from './security';
 export type DeliveryResult = { status: DeliveryStatus; providerId?: string; errorCode?: string };
 const payloadSchema = z.object({ title: z.string(), body: z.string() });
+class ProviderHttpError extends Error {
+  constructor(public status: number) {
+    super(`provider_http_${status}`);
+  }
+}
 async function request(url: string, init: RequestInit): Promise<unknown> {
   const response = await fetch(url, { ...init, signal: AbortSignal.timeout(12000) });
-  if (!response.ok) throw new Error(`provider_http_${response.status}`);
+  if (!response.ok) throw new ProviderHttpError(response.status);
   return response.json();
 }
 export async function deliver(job: Notification): Promise<DeliveryResult> {
@@ -14,7 +19,13 @@ export async function deliver(job: Notification): Promise<DeliveryResult> {
     if (env.NODE_ENV === 'production') return { status: 'FAILED', errorCode: 'TEST_DISABLED' };
     return { status: 'TEST' };
   }
-  const payload = payloadSchema.parse(JSON.parse(decrypt(job.payload).toString('utf8')));
+  let payload: z.infer<typeof payloadSchema>;
+  try {
+    payload = payloadSchema.parse(JSON.parse(decrypt(job.payload).toString('utf8')));
+  } catch {
+    // One corrupt row must not interrupt delivery of other queued alerts.
+    return { status: 'FAILED', errorCode: 'INVALID_NOTIFICATION_PAYLOAD' };
+  }
   try {
     if (job.channel === 'sms') {
       if (!env.SMS_ACCOUNT_SID || !env.SMS_AUTH_TOKEN || !env.SMS_FROM)
@@ -89,7 +100,14 @@ export async function deliver(job: Notification): Promise<DeliveryResult> {
         : { status: 'FAILED', errorCode: 'PUSH_REJECTED' };
     }
     return { status: 'FAILED', errorCode: 'UNKNOWN_CHANNEL' };
-  } catch {
+  } catch (error) {
+    if (
+      error instanceof ProviderHttpError &&
+      error.status >= 400 &&
+      error.status < 500 &&
+      error.status !== 408
+    )
+      return { status: 'FAILED', errorCode: `PROVIDER_HTTP_${error.status}` };
     return { status: 'UNKNOWN', errorCode: 'PROVIDER_UNCONFIRMED' };
   }
 }
@@ -117,7 +135,7 @@ export async function receipt(job: Notification): Promise<DeliveryResult | null>
       );
       const result = z.object({ last_event: z.string() }).parse(raw);
       if (result.last_event === 'delivered') return { status: 'DELIVERED' };
-      if (['bounced', 'failed', 'complained'].includes(result.last_event))
+      if (['bounced', 'failed', 'complained', 'canceled', 'suppressed'].includes(result.last_event))
         return { status: 'FAILED', errorCode: 'EMAIL_UNDELIVERED' };
     }
     if (job.channel === 'push' && env.EXPO_ACCESS_TOKEN) {
