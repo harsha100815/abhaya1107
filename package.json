@@ -35,7 +35,8 @@
     "test:local": "node scripts/test-local.mjs",
     "test:e2e:local": "node scripts/test-e2e-local.mjs",
     "assets": "node scripts/create-assets.mjs",
-    "check:mobile": "npm exec -w @abhaya/mobile -- expo install --check"
+    "check:mobile": "npm exec -w @abhaya/mobile -- expo install --check",
+    "start": "node scripts/start-free-preview.mjs"
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.8",
