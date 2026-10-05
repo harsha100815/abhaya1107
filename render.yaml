@@ -14,7 +14,7 @@ projects:
             runtime: node
             region: singapore
             plan: free
-            branch: rebuild/fresh-start
+            branch: rebuild/deploy-safe
             autoDeployTrigger: checksPass
             buildCommand: npm ci --include=dev --workspace @abhaya/web --workspace @abhaya/client --workspace @abhaya/ui --workspace @abhaya/utils --workspace @abhaya/types --workspace @abhaya/validation --include-workspace-root && npm run build -w @abhaya/web
             startCommand: API_URL="${API_ORIGIN}/api/v1" WEB_ORIGIN="$RENDER_EXTERNAL_URL" npm run start -w @abhaya/web
@@ -39,7 +39,7 @@ projects:
             runtime: node
             region: singapore
             plan: free
-            branch: rebuild/fresh-start
+            branch: rebuild/deploy-safe
             autoDeployTrigger: checksPass
             buildCommand: npm ci --include=dev --workspace @abhaya/api --workspace @abhaya/types --workspace @abhaya/utils --workspace @abhaya/validation --include-workspace-root && npm run db:generate && npm run build -w @abhaya/api
             # Free web services do not support a separate pre-deploy command.
@@ -75,7 +75,7 @@ projects:
             region: singapore
             # Background workers have no free plan. Applying creates a paid resource.
             plan: starter
-            branch: rebuild/fresh-start
+            branch: rebuild/deploy-safe
             autoDeployTrigger: checksPass
             buildCommand: npm ci --include=dev --workspace @abhaya/api --workspace @abhaya/types --workspace @abhaya/utils --workspace @abhaya/validation --include-workspace-root && npm run db:generate && npm run build -w @abhaya/api
             startCommand: bash scripts/render-worker.sh
