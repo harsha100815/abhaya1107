@@ -1,5 +1,6 @@
 import { spawn } from 'node:child_process';
 import { setTimeout as delay } from 'node:timers/promises';
+import { clearInterval, clearTimeout, setInterval } from 'node:timers';
 
 // A single free Render service for TEST previews. All processes sleep together.
 // Real emergency delivery requires the separate, always-on production stack.
@@ -9,7 +10,9 @@ for (const key of ['DATABASE_URL', 'JWT_SECRET', 'DATA_ENCRYPTION_KEY']) {
 }
 if (!origin) throw new Error('Set WEB_ORIGIN to the public HTTPS website URL.');
 if (process.env.TEST_MODE_ONLY !== 'true') {
-  throw new Error('The free preview requires TEST_MODE_ONLY=true. Use the production stack for live delivery.');
+  throw new Error(
+    'The free preview requires TEST_MODE_ONLY=true. Use the production stack for live delivery.',
+  );
 }
 const port = process.env.PORT || '10000';
 const apiPort = port === '4000' ? '4001' : '4000';
@@ -71,19 +74,39 @@ try {
     let ready = false;
     for (let attempt = 0; attempt < 60 && !stopping; attempt++) {
       try {
-        const response = await fetch(`http://127.0.0.1:${apiPort}/health`, { signal: AbortSignal.timeout(2000) });
-        if (response.ok) { ready = true; break; }
-      } catch {}
+        const response = await fetch(`http://127.0.0.1:${apiPort}/health`, {
+          signal: AbortSignal.timeout(2000),
+        });
+        if (response.ok) {
+          ready = true;
+          break;
+        }
+      } catch {
+        // The API may still be starting; retry within the existing deadline.
+      }
       await delay(1000);
     }
     if (!ready) throw new Error('API health check failed; the website will not start.');
     void run(process.execPath, ['apps/api/dist/worker.js'], apiEnv, true).catch(() => stop(1));
-    void run(process.execPath, ['node_modules/next/dist/bin/next', 'start', 'apps/web', '--hostname', '0.0.0.0', '--port', port], {
-      ...process.env,
-      NODE_ENV: 'production',
-      WEB_ORIGIN: origin,
-      API_URL: `http://127.0.0.1:${apiPort}/api/v1`,
-    }, true).catch(() => stop(1));
+    void run(
+      process.execPath,
+      [
+        'node_modules/next/dist/bin/next',
+        'start',
+        'apps/web',
+        '--hostname',
+        '0.0.0.0',
+        '--port',
+        port,
+      ],
+      {
+        ...process.env,
+        NODE_ENV: 'production',
+        WEB_ORIGIN: origin,
+        API_URL: `http://127.0.0.1:${apiPort}/api/v1`,
+      },
+      true,
+    ).catch(() => stop(1));
   }
 } catch (error) {
   console.error(error.message);

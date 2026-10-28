@@ -1,5 +1,10 @@
 # Deployment readiness — 2 October 2026
 
+Production deployment preparation resumed on 29 October 2026. Follow
+[the production deployment guide](PRODUCTION.md) for real-provider configuration,
+pre-migration validation and read-only live checks. The TEST preview instructions
+below remain historical preview guidance.
+
 ## Working copy
 
 Use `/Users/hasnabadharshavardhan/Projects/abhaya1107` on `rebuild/fresh-start`.

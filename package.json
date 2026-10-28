@@ -21,6 +21,8 @@
     "test": "vitest run",
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "test:e2e": "playwright test",
+    "test:deployment": "node --test scripts/production-smoke.test.mjs",
+    "deploy:verify": "node scripts/production-smoke.mjs",
     "build": "npm run build -w @abhaya/api && npm run build -w @abhaya/web",
     "build:mobile": "npm run export -w @abhaya/mobile",
     "db:generate": "npm run db:generate -w @abhaya/api",

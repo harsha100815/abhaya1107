@@ -82,7 +82,7 @@ projects:
                 sync: false
               - key: EXPO_ACCESS_TOKEN
                 sync: false
-            preDeployCommand: npm run db:deploy
+            preDeployCommand: npm run production:check -w @abhaya/api && npm run db:deploy
           - type: worker
             name: abhaya1107-worker-production
             runtime: node

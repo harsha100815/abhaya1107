@@ -8,6 +8,7 @@
     "worker": "tsx --env-file-if-exists=.env src/worker.ts",
     "start": "node --env-file-if-exists=.env dist/server.js",
     "start:worker": "node --env-file-if-exists=.env dist/worker.js",
+    "production:check": "node dist/production-check.js",
     "build": "tsup --config tsup.config.ts",
     "typecheck": "tsc --noEmit",
     "db:generate": "prisma generate",
