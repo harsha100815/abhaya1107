@@ -9,9 +9,25 @@ The production Blueprint starts each service separately; it does not use `npm st
 
 ## Deployment prerequisites
 
-The local checkout inspected for this release has no SMS, email or Expo credentials.
-Render's browser session currently requires sign-in. Cloud environment values have
-not been inspected. Enter provider secrets directly in Render, never in source or chat.
+The signed-in Render workspace was inspected on 29 October 2026. The existing
+`abhaya1107` web service is a free TEST preview on `rebuild/fresh-start` with
+`abhaya1107.in` attached. A separate preview PostgreSQL database also exists.
+The preview environment has no SMS, email or Expo push credential variables.
+Secret values were not revealed or copied.
+
+[Production PR #2](https://github.com/harsha100815/abhaya1107/pull/2) is merged into
+`rebuild/fresh-start`. Its [full CI run](https://github.com/harsha100815/abhaya1107/actions/runs/40761450999)
+passed on Node 24.22.1, including 46 unit tests, 5 deployment-verifier tests,
+16 PostgreSQL integration tests, API/web builds, mobile exports and 4 browser flows.
+
+Render found `render.production.yaml` during new-Blueprint setup, but stopped
+planning with **Payment Information Required** because no payment method is on
+file. Authenticated semantic validation, the final resource quote, secret entry
+and provisioning remain pending. No production resources were created, no billing
+commitment was accepted, and no custom-domain cutover was performed.
+
+Add payment details directly in Render billing, then resume the Blueprint setup.
+Enter provider secrets directly in Render, never in source or chat.
 
 | Setting                                                   | Destination and purpose                                                             |
 | --------------------------------------------------------- | ----------------------------------------------------------------------------------- |
