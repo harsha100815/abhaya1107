@@ -8,6 +8,9 @@ For the current local cleanup and deployment handoff, see [deployment readiness]
 
 For the 1,000-user paid budget and remaining live-release gates, read [the production audit](docs/audits/production-costs-2026-10-02.md).
 
+For the current real-provider deployment workflow, preflight and live verification,
+see [production deployment](docs/PRODUCTION.md).
+
 ## Architecture
 
 | Directory             | Responsibility                                                                                                    |
@@ -107,7 +110,7 @@ Copy the matching `.env.example` if configuring manually. Never commit real envi
 | Mobile       | Build-time `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_EAS_PROJECT_ID`                                                             |
 | Android map  | `GOOGLE_MAPS_ANDROID_API_KEY`, restricted to package and signing certificates                                              |
 
-API production startup refuses TEST mode, HTTP origins, missing SMS/email configuration or weak/missing keys. Use a separate development/staging API for simulated tests. Protect the encryption key for the full lifetime of encrypted data; do not regenerate it on deploy.
+API production startup refuses TEST mode, HTTP origins, missing SMS/email/push configuration, inconsistent browser origins or weak/missing keys. Use a separate development/staging API for simulated tests. Protect the encryption key for the full lifetime of encrypted data; do not regenerate it on deploy.
 
 No credentials or backend secrets may use an `EXPO_PUBLIC_` / `NEXT_PUBLIC_` prefix. Map keys shipped in a native client need provider-side application restrictions.
 

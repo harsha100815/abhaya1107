@@ -41,6 +41,8 @@ export default ts.config(
         setTimeout: 'readonly',
         Buffer: 'readonly',
         URL: 'readonly',
+        AbortSignal: 'readonly',
+        Response: 'readonly',
       },
     },
   },

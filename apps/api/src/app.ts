@@ -41,6 +41,7 @@ export function createApp() {
       testOnly: env.TEST_MODE_ONLY,
       liveAlertsConfigured: !!(env.SMS_ACCOUNT_SID && env.SMS_AUTH_TOKEN && env.SMS_FROM),
       emailVerificationConfigured: !!(env.EMAIL_API_KEY && env.EMAIL_FROM),
+      pushNotificationsConfigured: !!env.EXPO_ACCESS_TOKEN,
       emergencyNumber: env.EMERGENCY_NUMBER ?? null,
     }),
   );
